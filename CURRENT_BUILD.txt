@@ -1,0 +1,9 @@
+JinnxAutomation current reconstructed source package
+Based on active ChatGPT Library site artifact:
+Project ID: appgprj_6aa426d9509c8191a2d0443bf1be03e4
+Slug: jinnxautomation
+Live URL: https://jinnxautomation.hibestow001.chatgpt.site
+Source version: 1
+Projection revision: 2
+
+This source package is reconstructed from the preserved active site content because the Library site artifact does not expose the original hidden source tree.
