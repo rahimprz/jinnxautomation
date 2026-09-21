@@ -108,12 +108,47 @@ node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1
 
 Replace the filename with the pending migration and `DB` with your D1 binding name if different. Use `.wrangler/state`, not `.wrangler/state/v3`; Wrangler adds the versioned directories. Do not replay migrations already applied locally. This updates only the preview database; publishing applies production migrations separately.
 
+## Deploying to Cloudflare Workers
+
+This project builds a Cloudflare Worker, not a `.next/` directory. Platforms that
+auto-detect Next.js and look for `.next/routes-manifest.json` cannot build it, and
+the `cloudflare:workers` imports in `db/index.ts` and `lib/server/db.ts` resolve
+only inside the Workers runtime.
+
+Create the production D1 database once and note the `database_id` it prints:
+
+```sh
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 create jinnxautomation-d1
+```
+
+Apply each pending migration to the remote database in order, then deploy:
+
+```sh
+node --import ./scripts/sites-env.mjs ./node_modules/wrangler/bin/wrangler.js d1 execute DB --remote --config dist/server/wrangler.json --file drizzle/0000_simple_rocket_racer.sql
+npm run deploy
+```
+
+`npm run deploy` builds and then publishes `dist/server/wrangler.json`. Set these
+before deploying so the Worker binds the real database instead of the local
+placeholder; each falls back to its development default when unset:
+
+- `CLOUDFLARE_D1_DATABASE_ID`: the `database_id` from `d1 create` (required)
+- `CLOUDFLARE_D1_DATABASE_NAME`: the D1 database name (`site-creator-d1`)
+- `CLOUDFLARE_WORKER_NAME`: the deployed Worker name (`jinnxautomation`)
+- `CLOUDFLARE_R2_BUCKET_NAME`: the R2 bucket name, when `r2` is declared
+
+Authenticate with `wrangler login`, or set `CLOUDFLARE_API_TOKEN` and
+`CLOUDFLARE_ACCOUNT_ID` for CI. Hosted ChatGPT sign-in is dispatch-owned, so a
+self-hosted deploy must supply its own trusted authentication before exposing
+`/admin`; never accept client-supplied identity headers as authentication.
+
 ## Diagnostic Commands
 
 - `npm run install:ci`: perform the one locked dependency install
 - `npm run dev`: start the Vite/Vinext development server
 - `npm run build`: build the deployable Sites artifact
 - `npm run start`: preview the built Worker locally with D1/R2 support
+- `npm run deploy`: build and publish the Worker to Cloudflare
 - `npm run db:generate`: generate Drizzle migrations after schema changes
 
 When using the Sites plugin, follow its skill instructions for installation, builds, and publishing. These npm commands remain available for standalone use.

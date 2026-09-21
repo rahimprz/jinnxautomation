@@ -9,19 +9,31 @@ const SITE_CREATOR_PLACEHOLDER_DATABASE_ID =
 
 const { d1, r2 } = hostingConfig;
 
+// Deploys need the real Cloudflare resource identifiers; local previews keep
+// working on the placeholders because Miniflare never resolves them remotely.
+const workerName = process.env.CLOUDFLARE_WORKER_NAME ?? "jinnxautomation";
+const d1DatabaseName =
+  process.env.CLOUDFLARE_D1_DATABASE_NAME ?? "site-creator-d1";
+const d1DatabaseId =
+  process.env.CLOUDFLARE_D1_DATABASE_ID ?? SITE_CREATOR_PLACEHOLDER_DATABASE_ID;
+const r2BucketName =
+  process.env.CLOUDFLARE_R2_BUCKET_NAME ?? "site-creator-r2";
+
 // macOS Seatbelt blocks FSEvents, so Codex previews need polling for HMR.
 const isCodexSeatbeltSandbox = process.env.CODEX_SANDBOX === "seatbelt";
 const managedLinux = readExecutionProfile() === "managed-linux";
 
 const localBindingConfig = {
+  name: workerName,
   main: "vinext/server/fetch-handler",
+  compatibility_date: "2026-05-15",
   compatibility_flags: ["nodejs_compat"],
   d1_databases: d1
     ? [
         {
           binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_name: d1DatabaseName,
+          database_id: d1DatabaseId,
         },
       ]
     : [],
@@ -29,7 +41,7 @@ const localBindingConfig = {
     ? [
         {
           binding: r2,
-          bucket_name: "site-creator-r2",
+          bucket_name: r2BucketName,
         },
       ]
     : [],
