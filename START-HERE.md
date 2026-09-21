@@ -1,35 +1,32 @@
-# Jinnx Automation — version 4 source export
+# Jinnx Automation — source
 
-Exact published source commit: 1972ab5dcd5b9439256d19d13000a4c38a689901
+Next.js 16 App Router site with the inquiry intake API, admin inbox, database
+schema and migrations, security tests, and dependency lockfile.
 
-Includes React pages, styles, animations, logo and image assets, inquiry APIs,
-admin inbox, database schema and migrations, security tests, and dependency lockfile.
+## Setup
 
-## Local setup
+Install Node.js 22.13 or newer and pnpm 11.25.0, then:
 
-Install Node.js 22.13 or newer and pnpm 11.25.0. From this directory run:
-
-    pnpm install --frozen-lockfile
+    pnpm install
+    cp .env.example .env.local
+    pnpm db:migrate
     pnpm dev
 
-For a production build:
-
-    pnpm build
-
-Read README.md for the runtime and local database migration instructions.
-The application uses React with Next.js App Router conventions, executed by
-Vinext on Cloudflare Workers. Persistent inquiries use Cloudflare D1.
+Read README.md for the environment variables, deployment steps, and database
+notes. The application runs on Vercel and stores inquiries in Postgres.
 
 ## Admin and hosting
 
-The admin route is /admin. Authentication on the hosted Site uses ChatGPT sign-in
-and owner authorization; there is no shared admin password in this archive.
-Hosting elsewhere requires configuring a D1 database and a trusted authentication
-integration. Do not accept client-supplied identity headers as authentication.
-The archive includes database schema and migrations, not production inquiry data.
-Dependencies and generated build outputs are not included; install and build first.
+The admin route is /admin, protected by the `ADMIN_PASSWORD` environment
+variable with a signed session cookie. There is no shared password in this
+archive; set your own. Do not accept client-supplied identity headers as
+authentication.
 
-This export preserves the website source without changing the live site.
+The archive includes database schema and migrations, not production inquiry
+data. Dependencies and generated build outputs are not included; install and
+build first.
 
-## Contact update — 21 September 2026
-Both phone numbers, info@jinnxautomation.com, business hours, and Chicago and Glasgow office addresses are included on the contact page and site footers. Office addresses verified against https://jinnxbookpress.com/contact. This is a source ZIP update; the deployed Site is unchanged. Adding the email link does not provision an email mailbox.
+## Contact details
+
+Both phone numbers, info@jinnxautomation.com, business hours, and the Chicago
+and Glasgow office addresses appear on the contact page and site footers.

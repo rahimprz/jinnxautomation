@@ -4,19 +4,14 @@
 /node_modules
 /.pnp
 .pnp.*
-.yarn/*
-!.yarn/patches
-!.yarn/plugins
-!.yarn/releases
-!.yarn/versions
 
 # testing
 /coverage
 
 # next.js
 /.next/
-/.vinext/
 /out/
+next-env.d.ts
 
 # misc
 .DS_Store
@@ -28,22 +23,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
+!.env.example
 
 # vercel
 .vercel
 
 # typescript
-next-env.d.ts
-/dist/
-/.wrangler/
-# Checkout-local execution profile and tool state; never publish them.
-/.sites-runtime/
-/.agents/
-/.codex/
-/outputs/
-/work/
-
-# typescript incremental build cache
 tsconfig.tsbuildinfo

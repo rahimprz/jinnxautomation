@@ -4,7 +4,7 @@ const nextConfig:NextConfig={
  {key:'X-Content-Type-Options',value:'nosniff'},
  {key:'Referrer-Policy',value:'strict-origin-when-cross-origin'},
  {key:'Permissions-Policy',value:'camera=(), microphone=(), geolocation=()'},
- {key:'Content-Security-Policy',value:"object-src 'none'; base-uri 'self'; frame-ancestors 'self' https://chatgpt.com https://*.chatgpt.com"}
+ {key:'Content-Security-Policy',value:"object-src 'none'; base-uri 'self'; frame-ancestors 'self'"}
  ]},{source:'/admin/:path*',headers:[{key:'Cache-Control',value:'private, no-store'}]}]}
 };
 export default nextConfig;
