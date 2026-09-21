@@ -1,0 +1,1019 @@
+@import  url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+@import  "tailwindcss";
+@import  "tw-animate-css";
+@import  "../vendor/shadcn-tailwind-4.13.0.css";
+:root:where(:not(.reference-site,.reference-site *)){--background:#faf7f1;--foreground:#10252a;--card:#fff;--card-foreground:#10252a;--popover:#fff;--popover-foreground:#10252a;--primary:#ff701f;--primary-foreground:#fff;--secondary:#f0eee8;--secondary-foreground:#10252a;--muted:#efeee9;--muted-foreground:#687577;--accent:#fff0e5;--accent-foreground:#10252a;--destructive:#ba3d30;--border:#dcded9;--input:#dcded9;--ring:#ff701f;--radius:.7rem;--orange:#fc7025;--ink:#10252a;--paper:#faf7f1;--font-sans:Inter,Arial,sans-serif}
+@theme  inline{--color-background:var(--background);--color-foreground:var(--foreground);--color-card:var(--card);--color-card-foreground:var(--card-foreground);--color-popover:var(--popover);--color-popover-foreground:var(--popover-foreground);--color-primary:var(--primary);--color-primary-foreground:var(--primary-foreground);--color-secondary:var(--secondary);--color-secondary-foreground:var(--secondary-foreground);--color-muted:var(--muted);--color-muted-foreground:var(--muted-foreground);--color-accent:var(--accent);--color-accent-foreground:var(--accent-foreground);--color-border:var(--border);--color-input:var(--input);--color-ring:var(--ring);--radius-lg:var(--radius);--font-sans:Inter,Arial,sans-serif}
+*:where(:not(.reference-site,.reference-site *)){box-sizing:border-box}
+html:where(:not(.reference-site,.reference-site *)){scroll-behavior:smooth;scroll-padding-top:105px}
+body:where(:not(.reference-site,.reference-site *)){margin:0;background:var(--paper);color:var(--ink);font-family:Inter,Arial,sans-serif;font-size:16px;line-height:1.6}
+button:where(:not(.reference-site,.reference-site *)),a:where(:not(.reference-site,.reference-site *)),input:where(:not(.reference-site,.reference-site *)),textarea:where(:not(.reference-site,.reference-site *)){-webkit-tap-highlight-color:transparent}
+button:where(:not(.reference-site,.reference-site *)),a:where(:not(.reference-site,.reference-site *)){touch-action:manipulation}
+button:where(:not(.reference-site,.reference-site *)){cursor:pointer}
+a:where(:not(.reference-site,.reference-site *)){text-decoration:none;color:inherit}
+button:focus-visible:where(:not(.reference-site,.reference-site *)),a:focus-visible:where(:not(.reference-site,.reference-site *)){outline:3px solid var(--orange);outline-offset:5px}
+button:where(:not(.reference-site,.reference-site *)){font:inherit}
+h1:where(:not(.reference-site,.reference-site *)),h2:where(:not(.reference-site,.reference-site *)),h3:where(:not(.reference-site,.reference-site *)),h4:where(:not(.reference-site,.reference-site *)),p:where(:not(.reference-site,.reference-site *)){margin:0}
+h1:where(:not(.reference-site,.reference-site *)),h2:where(:not(.reference-site,.reference-site *)),h3:where(:not(.reference-site,.reference-site *)),h4:where(:not(.reference-site,.reference-site *)),.brand:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk",Inter,sans-serif}
+h1:where(:not(.reference-site,.reference-site *)),h2:where(:not(.reference-site,.reference-site *)){line-height:1.03;letter-spacing:-.065em;font-weight:600}
+h2:where(:not(.reference-site,.reference-site *)){font-size:clamp(38px,4.5vw,66px)}
+h3:where(:not(.reference-site,.reference-site *)){font-size:25px;line-height:1.22;letter-spacing:-.04em;font-weight:600}
+h4:where(:not(.reference-site,.reference-site *)){font-size:17px;line-height:1.4;font-weight:600}
+p:where(:not(.reference-site,.reference-site *)){color:#657073;line-height:1.7}
+svg:where(:not(.reference-site,.reference-site *)){flex-shrink:0}
+.wrap:where(:not(.reference-site,.reference-site *)){width:min(1240px,calc(100% - 100px));margin:auto}
+.mono:where(:not(.reference-site,.reference-site *)),.eyebrow:where(:not(.reference-site,.reference-site *)){font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.085em}
+.orange:where(:not(.reference-site,.reference-site *)){color:var(--orange)}
+.muted:where(:not(.reference-site,.reference-site *)){color:#90999a}
+.reading-progress:where(:not(.reference-site,.reference-site *)){position:fixed;top:0;left:0;height:3px;background:var(--orange);z-index:70}
+.site-header:where(:not(.reference-site,.reference-site *)){position:sticky;top:0;background:#faf7f1ed;backdrop-filter:blur(20px);border-bottom:1px solid #10252a10;z-index:40}
+.nav-wrap:where(:not(.reference-site,.reference-site *)){width:min(1280px,calc(100% - 80px));margin:auto;display:flex;align-items:center;justify-content:space-between;gap:25px;height:88px}
+.brand:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:10px;font-size:23px;letter-spacing:-1px;font-weight:700;line-height:1}
+.brand-accent:where(:not(.reference-site,.reference-site *)){color:var(--orange)}
+.brand small:where(:not(.reference-site,.reference-site *)){display:block;margin-top:8px;font:8px "JetBrains Mono",monospace;letter-spacing:3px;color:#75888a}
+.brand-mark:where(:not(.reference-site,.reference-site *)){display:grid;place-items:center;width:39px;height:42px;border:1.5px solid var(--ink);border-radius:11px;transform:rotate(-7deg);color:var(--orange)}
+.brand-mark svg:where(:not(.reference-site,.reference-site *)){transform:rotate(7deg)}
+.nav-links:where(:not(.reference-site,.reference-site *)){display:flex;gap:28px;font-size:14px}
+.nav-links a:where(:not(.reference-site,.reference-site *)){position:relative}
+.nav-links a:where(:not(.reference-site,.reference-site *)):after{content:"";position:absolute;bottom:-6px;left:0;width:0;height:2px;background:var(--orange);transition:width .2s}
+.nav-links a:hover:where(:not(.reference-site,.reference-site *)):after{width:100%}
+.button:where(:not(.reference-site,.reference-site *)){display:inline-flex;align-items:center;justify-content:center;gap:15px;min-height:52px;padding:15px 24px;font-size:15px;font-weight:600;line-height:1.25;border-radius:8px;transition:transform .2s,box-shadow .2s,background .2s;height:auto;white-space:normal}
+.button:hover:where(:not(.reference-site,.reference-site *)){transform:translateY(-3px)}
+.button:hover svg:where(:not(.reference-site,.reference-site *)){transform:translate(2px,-2px)}
+.button svg:where(:not(.reference-site,.reference-site *)){transition:transform .2s}
+.dark:where(:not(.reference-site,.reference-site *)){background:var(--ink);color:white;box-shadow:0 5px 10px #10252a13}
+.orange-btn:where(:not(.reference-site,.reference-site *)){background:var(--orange);color:white;border:1px solid var(--orange);box-shadow:0 6px 15px #fb702527}
+.orange-btn:hover:where(:not(.reference-site,.reference-site *)){background:#e9631d;box-shadow:0 8px 20px #fb702540}
+.outline:where(:not(.reference-site,.reference-site *)){background:transparent;border:1px solid #10252a33;color:var(--ink)}
+.outline:hover:where(:not(.reference-site,.reference-site *)){background:#fff}
+.nav-cta:where(:not(.reference-site,.reference-site *)){min-height:43px;font-size:13px;padding:12px 18px}
+.menu-toggle:where(:not(.reference-site,.reference-site *)){display:none}
+.eyebrow:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:10px;margin-bottom:28px;color:#5e797b;font-size:11px;font-weight:500;line-height:1.6}
+.eyebrow>span:where(:not(.reference-site,.reference-site *)){width:6px;height:6px;background:var(--orange);border-radius:50%;flex-shrink:0}
+.grid-paper:where(:not(.reference-site,.reference-site *)){background-image:linear-gradient(#123b3710 1px,transparent 1px),linear-gradient(90deg,#123b3710 1px,transparent 1px);background-size:80px 80px}
+.hero:where(:not(.reference-site,.reference-site *)){padding-top:75px;overflow:hidden;position:relative}
+.hero-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1.35fr 1fr;gap:50px;align-items:center}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){width:fit-content;border:1px solid #427b7925;background:#dbe7e350;padding:6px 12px;border-radius:30px;font-size:10px}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(62px,6.3vw,92px);line-height:1.04;letter-spacing:-.07em}
+.crossed:where(:not(.reference-site,.reference-site *)){font-size:.76em;color:#929999;position:relative;white-space:nowrap}
+.crossed:where(:not(.reference-site,.reference-site *)):after{content:"";position:absolute;left:-3px;right:-6px;top:59%;height:4px;background:var(--orange);transform:rotate(-3deg);transform-origin:left;animation:strike 1s .4s both}
+.hero-copy>p:where(:not(.reference-site,.reference-site *)){font-size:17px;max-width:570px;margin:30px 0 27px;color:#46595d}
+.actions:where(:not(.reference-site,.reference-site *)){display:flex;gap:13px;flex-wrap:wrap}
+.hero-notes:where(:not(.reference-site,.reference-site *)){display:flex;gap:22px;margin-top:23px;color:#647475;font-size:11px}
+.hero-notes span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:6px}
+.hero-aside:where(:not(.reference-site,.reference-site *)){position:relative;align-self:center;padding-top:28px;animation:enter .9s .2s both}
+.sprint-label:where(:not(.reference-site,.reference-site *)){margin-bottom:15px;display:flex;align-items:center;justify-content:center;gap:8px;font-size:10px;color:#6a7e7f}
+.pulse:where(:not(.reference-site,.reference-site *)){display:inline-block;width:6px;height:6px;border-radius:50%;background:#589688;box-shadow:0 0 0 4px #6a9e8810;animation:pulse 2s infinite;flex-shrink:0}
+.sprint-card:where(:not(.reference-site,.reference-site *)){border:1px solid #d9e0dc;background:#fffdfb;border-radius:17px;padding:24px;box-shadow:0 20px 50px #1d393411,0 3px 5px #1d393407;position:relative;transform:rotate(1deg)}
+.sprint-top:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;align-items:center;gap:10px}
+.sprint-top>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#78888a}
+.status:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:6px;font:9px "JetBrains Mono",monospace;padding:5px 7px;border-radius:4px;background:#e9f0eb;color:#477363}
+.sprint-title:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:27px;line-height:1.25;letter-spacing:-1px;margin-top:26px}
+.hours-display:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:15px;margin:13px 0 25px}
+.hours-display b:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:105px;line-height:1;font-weight:500;letter-spacing:-9px;color:var(--orange)}
+.hours-display>span:where(:not(.reference-site,.reference-site *)){font-size:20px;line-height:1.4;padding-top:15px}
+.hours-display small:where(:not(.reference-site,.reference-site *)){font:9px "JetBrains Mono";color:#8d9796}
+.sprint-track:where(:not(.reference-site,.reference-site *)){display:flex;border:1px solid #dee2dd;border-radius:7px;overflow:hidden}
+.sprint-track button:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;gap:7px;align-items:center;padding:12px 0;flex:1;border-right:1px solid #dee2dd;font-size:10px;color:#7a8887;background:#fafaf6;transition:.2s}
+.sprint-track button:last-child:where(:not(.reference-site,.reference-site *)){border:0}
+.sprint-track .active:where(:not(.reference-site,.reference-site *)){background:#fff0e5;color:#e66521}
+.sprint-phase:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:8px;font-size:11px;margin:19px 0 13px}
+.sprint-phase .mono:where(:not(.reference-site,.reference-site *)){margin-left:auto;font-size:10px;color:#748987}
+.terminal:where(:not(.reference-site,.reference-site *)){background:#132a2e;color:#adbfbc;border-radius:9px;padding:16px;font:10px "JetBrains Mono";line-height:1.9;min-height:138px}
+.terminal p:where(:not(.reference-site,.reference-site *)){font:inherit;color:inherit}
+.terminal p:first-of-type:where(:not(.reference-site,.reference-site *)){margin:8px 0}
+.terminal b:where(:not(.reference-site,.reference-site *)),.terminal p>span:where(:not(.reference-site,.reference-site *)){color:#92bb9f;font-weight:400}
+.terminal-dots:where(:not(.reference-site,.reference-site *)){font-size:8px;color:#81918a;letter-spacing:4px}
+.typing:where(:not(.reference-site,.reference-site *)){white-space:nowrap;font-size:9px!important}
+.typing i:where(:not(.reference-site,.reference-site *)){display:inline-block;width:5px;height:11px;background:var(--orange);vertical-align:middle;margin-left:4px;animation:blink 1s steps(1) infinite}
+.sprint-bottom:where(:not(.reference-site,.reference-site *)){display:flex;gap:7px;align-items:center;margin-top:18px;font-size:10px;color:#738785}
+.sprint-bottom svg:last-child:where(:not(.reference-site,.reference-site *)){margin-left:auto}
+.floating-note:where(:not(.reference-site,.reference-site *)){position:absolute;bottom:-24px;right:-14px;border:1px solid #dfdcd2;border-radius:7px;background:#fff6e6;padding:11px 18px;transform:rotate(-4deg);font-size:12px;box-shadow:0 4px 10px #00000008}
+.floating-note>span:where(:not(.reference-site,.reference-site *)){color:var(--orange);font-size:20px;vertical-align:middle;margin-right:9px}
+.metric-strip:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(4,1fr);padding:40px 0;margin-top:65px;border-top:1px solid #10252a20}
+.metric-strip>div:where(:not(.reference-site,.reference-site *)){padding-left:35px;border-left:1px solid #10252a17;display:flex;flex-direction:column;gap:4px}
+.metric-strip>div:first-child:where(:not(.reference-site,.reference-site *)){padding-left:0;border:0}
+.metric-strip strong:where(:not(.reference-site,.reference-site *)){font:500 35px "Space Grotesk";letter-spacing:-1.5px}
+.metric-strip .mono:where(:not(.reference-site,.reference-site *)){font-size:9px;text-transform:uppercase;color:#7b8987}
+.section:where(:not(.reference-site,.reference-site *)){padding-top:100px;padding-bottom:100px;scroll-margin-top:10px}
+.section-head:where(:not(.reference-site,.reference-site *)){display:flex;align-items:flex-end;justify-content:space-between;gap:40px;margin-bottom:43px}
+.section-head>p:where(:not(.reference-site,.reference-site *)){max-width:350px;font-size:15px}
+.problem-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.problem-card:where(:not(.reference-site,.reference-site *)){padding:30px;border:1px solid #deddd5;border-radius:10px;position:relative;background:#fffdf9;transition:transform .25s}
+.problem-card:hover:where(:not(.reference-site,.reference-site *)){transform:translateY(-5px)}
+.problem-card>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#b17b5c}
+.problem-card h3:where(:not(.reference-site,.reference-site *)){font-size:43px;letter-spacing:-2px;margin:26px 0;color:#9c6b53}
+.problem-card h4:where(:not(.reference-site,.reference-site *)){font-size:16px;margin-bottom:10px}
+.problem-card p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.split-section:where(:not(.reference-site,.reference-site *)){background:#f0f0e9;border-top:1px solid #dde0d8;border-bottom:1px solid #dde0d8}
+.comparison:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative;margin-top:44px}
+.comparison-card:where(:not(.reference-site,.reference-site *)){padding:34px;border-radius:11px;border:1px solid #d6dad2;background:#f7f7f1}
+.comparison-card .mono:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.comparison-card h3:where(:not(.reference-site,.reference-site *)){font-size:30px;margin:15px 0 25px}
+.comparison-card.new:where(:not(.reference-site,.reference-site *)){background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 15px 30px #142c2512}
+.comparison-card.new>.mono:where(:not(.reference-site,.reference-site *)){color:#faa777}
+.old:where(:not(.reference-site,.reference-site *)){color:#7a8583}
+.compare-row:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:13px;border-top:1px solid #84999425;padding:17px 0;font-size:13px}
+.compare-row>svg:where(:not(.reference-site,.reference-site *)),.compare-row>b:where(:not(.reference-site,.reference-site *)){margin-left:auto}
+.step-num:where(:not(.reference-site,.reference-site *)){font:10px "JetBrains Mono";color:#89978e;flex-shrink:0}
+.new .step-num:where(:not(.reference-site,.reference-site *)),.new .compare-row b:where(:not(.reference-site,.reference-site *)){color:#fc9b65}
+.result:where(:not(.reference-site,.reference-site *)){border-top:1px solid #84999425;padding-top:20px;margin-top:6px;font-size:14px;display:flex;align-items:center;gap:8px}
+.new .result:where(:not(.reference-site,.reference-site *)){color:#ffae7f}
+.vs:where(:not(.reference-site,.reference-site *)){position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:6px solid #f0f0e9;border-radius:50%;width:53px;height:53px;display:grid;place-items:center;background:#fff;font:12px "JetBrains Mono"}
+.three-promises:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,1fr);gap:45px;margin-top:40px}
+.three-promises svg:where(:not(.reference-site,.reference-site *)){color:#6f8b80;width:21px;margin-bottom:12px}
+.three-promises h4:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.three-promises p:where(:not(.reference-site,.reference-site *)){font-size:13px;margin-top:8px}
+.timeline-head:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;gap:15px;margin:45px 0 14px;font-size:12px;color:#708280}
+.timeline-head>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.timeline-bar:where(:not(.reference-site,.reference-site *)){display:flex;gap:5px;margin-bottom:28px}
+.timeline-bar button:where(:not(.reference-site,.reference-site *)){background:#b9d1c7;height:38px;text-align:left;border-radius:4px;padding-left:12px;font:10px "JetBrains Mono";min-width:48px;transition:.3s}
+.timeline-bar button:nth-child(2):where(:not(.reference-site,.reference-site *)){background:var(--orange);color:white}
+.timeline-bar button:nth-child(3):where(:not(.reference-site,.reference-site *)){background:#c5d5c3}
+.timeline-bar button:nth-child(4):where(:not(.reference-site,.reference-site *)){background:var(--ink);color:#fff}
+.timeline-bar button:hover:where(:not(.reference-site,.reference-site *)){filter:brightness(.93);transform:translateY(-3px)}
+.journey-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.journey-card:where(:not(.reference-site,.reference-site *)){background:#fffdf9;border:1px solid #e0dfd7;border-radius:10px;padding:25px 22px;transition:.3s;scroll-margin:120px}
+.journey-card.highlight:where(:not(.reference-site,.reference-site *)){border-color:#efad86;background:#fff8f0}
+.journey-number:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;align-items:center;margin-bottom:23px}
+.journey-number>span:where(:not(.reference-site,.reference-site *)){font:40px "Space Grotesk";color:#b1beb5;letter-spacing:-2px}
+.journey-number svg:where(:not(.reference-site,.reference-site *)){color:#6a8578}
+.highlight .journey-number>span:where(:not(.reference-site,.reference-site *)),.highlight .journey-number svg:where(:not(.reference-site,.reference-site *)){color:var(--orange)}
+.journey-card>.mono:where(:not(.reference-site,.reference-site *)){font-size:9px;color:#8b8f80}
+.journey-card h3:where(:not(.reference-site,.reference-site *)){font-size:23px;margin:12px 0}
+.journey-card p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.your-role:where(:not(.reference-site,.reference-site *)){padding:17px 0;margin-top:20px;border-top:1px solid #dadfd5}
+.your-role>.mono:where(:not(.reference-site,.reference-site *)){font-size:9px;color:#829484}
+.your-role p:where(:not(.reference-site,.reference-site *)){font-size:12px;margin-top:8px}
+.deliverables:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;gap:8px;margin-top:6px}
+.deliverables span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:5px;font-size:11px}
+.deliverables svg:where(:not(.reference-site,.reference-site *)){color:#72997c}
+.journey-foot:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;gap:20px;border-bottom:1px solid #dce1d7;padding:26px 0;font-size:12px;color:#667f76}
+.journey-foot span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:8px}
+.journey-foot svg:where(:not(.reference-site,.reference-site *)){width:16px}
+.speed-section:where(:not(.reference-site,.reference-site *)){background:#10272a;color:#f6f5ed}
+.speed-section .eyebrow:where(:not(.reference-site,.reference-site *)){color:#8ca8a0}
+.speed-section .section-head>p:where(:not(.reference-site,.reference-site *)){color:#a6b8b2}
+.method-table:where(:not(.reference-site,.reference-site *)){border:1px solid #96b6a42a;border-radius:10px;overflow:hidden}
+.method-row:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1.2fr 1.5fr;border-bottom:1px solid #96b6a42a;align-items:stretch;font-size:13px}
+.method-row:last-child:where(:not(.reference-site,.reference-site *)){border-bottom:0}
+.method-row>*:where(:not(.reference-site,.reference-site *)){padding:20px 23px;display:flex;align-items:center;gap:10px}
+.method-row>:nth-child(2):where(:not(.reference-site,.reference-site *)){color:#92a6a0}
+.method-row>:last-child:where(:not(.reference-site,.reference-site *)){background:#29423a6b;color:#d5e9d8}
+.method-row svg:where(:not(.reference-site,.reference-site *)){color:#afcf9d}
+.table-heading:where(:not(.reference-site,.reference-site *)){font:10px "JetBrains Mono";text-transform:uppercase;letter-spacing:.07em;background:#183136}
+.method-row strong:where(:not(.reference-site,.reference-site *)){font-weight:500}
+.included-strip:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;justify-content:space-between;gap:15px;padding-top:35px}
+.included-strip>span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:8px;font-size:11px;color:#b6c9bf}
+.included-strip>.mono:where(:not(.reference-site,.reference-site *)){font-size:9px;max-width:120px;color:#8da497}
+.included-strip svg:where(:not(.reference-site,.reference-site *)){color:#c3dbac}
+.industry-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.industry-card:where(:not(.reference-site,.reference-site *)){text-align:left;background:#fffdf9;border:1px solid #dddfd6;border-radius:9px;padding:22px 18px;transition:transform .25s,border-color .25s,box-shadow .25s;display:flex;flex-direction:column}
+.industry-card:hover:where(:not(.reference-site,.reference-site *)){transform:translateY(-6px);border-color:#f3a176;box-shadow:0 10px 25px #29291a08}
+.industry-top:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;align-items:center;color:#8a9a8d;margin-bottom:25px}
+.industry-top .mono:where(:not(.reference-site,.reference-site *)){font-size:9px}
+.industry-top svg:where(:not(.reference-site,.reference-site *)){width:15px}
+.industry-icon:where(:not(.reference-site,.reference-site *)){color:#b78665;margin-bottom:22px}
+.industry-card h3:where(:not(.reference-site,.reference-site *)){font-size:21px;line-height:1.2;margin-bottom:13px}
+.industry-card p:where(:not(.reference-site,.reference-site *)){font-size:12px;line-height:1.7;flex:1}
+.tags:where(:not(.reference-site,.reference-site *)){display:flex;flex-wrap:wrap;gap:5px;margin-top:20px}
+.tags span:where(:not(.reference-site,.reference-site *)){font:8px "JetBrains Mono";padding:5px 6px;background:#edf0e7;border:1px solid #e0e5d6;border-radius:3px;color:#718168}
+.section-bottom:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:28px}
+.section-bottom p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.section-bottom strong:where(:not(.reference-site,.reference-site *)){font-weight:500;color:var(--ink)}
+.pricing-section:where(:not(.reference-site,.reference-site *)){background:#f0f0e9;border-top:1px solid #dce0d4;border-bottom:1px solid #dce0d4}
+.intro:where(:not(.reference-site,.reference-site *)){font-size:17px;max-width:650px;margin-top:25px}
+.included-pills:where(:not(.reference-site,.reference-site *)){display:flex;flex-wrap:wrap;align-items:center;gap:20px;border:1px solid #dce0d4;background:#f9faf4;padding:16px 20px;border-radius:7px;margin-top:32px}
+.included-pills>span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:5px;font-size:11px}
+.included-pills>.mono:where(:not(.reference-site,.reference-site *)){font-size:9px;color:#7f9283}
+.included-pills svg:where(:not(.reference-site,.reference-site *)){color:#64866f}
+.pricing-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1.8fr 1fr;gap:35px;align-items:start;margin-top:42px}
+.pricing-group:where(:not(.reference-site,.reference-site *)){margin-bottom:32px}
+.pricing-group>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#7f9384}
+.pricing-group>h3:where(:not(.reference-site,.reference-site *)){font-size:24px;margin:6px 0 18px}
+.package-options:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.package-option:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:20px 17px;border:1px solid #d9ded3;border-radius:9px;background:#fafbf6;transition:.2s;position:relative;min-height:223px}
+.package-option>svg:where(:not(.reference-site,.reference-site *)){color:#80977f;margin-bottom:19px}
+.package-option h4:where(:not(.reference-site,.reference-site *)){font-size:15px;line-height:1.3;margin-bottom:8px}
+.package-option p:where(:not(.reference-site,.reference-site *)){font-size:11px;line-height:1.6;flex:1}
+.option-price:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:4px;margin-top:18px;font-size:11px;color:#66816b;font-weight:500}
+.package-option.chosen:where(:not(.reference-site,.reference-site *)){border-color:#f6813b;background:#fff5e9;box-shadow:0 0 0 1px #f6813b}
+.package-option.chosen>.option-price:where(:not(.reference-site,.reference-site *)),.package-option.chosen>svg:where(:not(.reference-site,.reference-site *)){color:#dd692c}
+.package-option:hover:not(.base-option):where(:not(.reference-site,.reference-site *)){border-color:#f6813b;transform:translateY(-3px)}
+.base-option:where(:not(.reference-site,.reference-site *)){background:#e8ede3}
+.package-summary:where(:not(.reference-site,.reference-site *)){position:sticky;top:115px;background:#fffefa;border:1px solid #d9ded2;box-shadow:0 10px 40px #1e322b0b;border-radius:13px;padding:28px}
+.summary-heading:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;justify-content:space-between;gap:8px;padding-bottom:24px;border-bottom:1px solid #e1e4db}
+.summary-heading h3:where(:not(.reference-site,.reference-site *)){font-size:20px}
+.summary-line:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:7px;padding:18px 0;font-size:12px}
+.summary-line>b:where(:not(.reference-site,.reference-site *)){margin-left:auto;white-space:nowrap;font-weight:600}
+.summary-line button:where(:not(.reference-site,.reference-site *)){color:#8c9c8b}
+.selected-extras:where(:not(.reference-site,.reference-site *)){min-height:120px;border-bottom:1px solid #e1e4db}
+.selected-extras p:where(:not(.reference-site,.reference-site *)){text-align:center;font-size:12px;padding:25px 0;color:#98a294}
+.selected-extras .summary-line:where(:not(.reference-site,.reference-site *)){padding:8px 0}
+.summary-total:where(:not(.reference-site,.reference-site *)){padding:24px 0}
+.summary-total>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#83917d}
+.summary-total strong:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:54px;letter-spacing:-3px;display:block;line-height:1.35}
+.summary-total p:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.package-summary>.button:where(:not(.reference-site,.reference-site *)){width:100%;font-size:13px}
+.summary-trust:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:center;gap:20px;font-size:10px;color:#798b76;padding:19px 0}
+.summary-trust>span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:4px}
+.package-summary>small:where(:not(.reference-site,.reference-site *)){display:block;font-size:10px;text-align:center;color:#98a190;line-height:1.6}
+.capacity-section:where(:not(.reference-site,.reference-site *)){background:#fffaf2}
+.capacity-section>.wrap:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center}
+.capacity-section h2:where(:not(.reference-site,.reference-site *)){font-size:49px}
+.capacity-section p:where(:not(.reference-site,.reference-site *)){max-width:470px;margin:24px 0;font-size:15px}
+.capacity-note:where(:not(.reference-site,.reference-site *)){display:block;font-size:11px;color:#8b9786;margin-top:17px}
+.launch-plan:where(:not(.reference-site,.reference-site *)){background:#fffef9;border:1px solid #e0e1d6;border-radius:12px;padding:27px}
+.launch-plan>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#819581}
+.launch-plan>div:not(.consult):where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:15px;border-bottom:1px solid #e3e6da;padding:22px 0}
+.launch-plan>div>span:first-child:where(:not(.reference-site,.reference-site *)){font:11px "JetBrains Mono";color:#a0af94}
+.launch-plan strong:where(:not(.reference-site,.reference-site *)){font-size:13px;font-weight:500}
+.launch-plan small:where(:not(.reference-site,.reference-site *)){margin-left:auto;font-size:10px;color:#92a183}
+.consult:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:12px;padding-top:25px}
+.consult>svg:where(:not(.reference-site,.reference-site *)){color:var(--orange)}
+.consult>span:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;gap:4px}
+.consult b:where(:not(.reference-site,.reference-site *)){font-size:12px;font-weight:500}
+.consult small:where(:not(.reference-site,.reference-site *)){font-size:10px;margin:0}
+.consult button:where(:not(.reference-site,.reference-site *)){margin-left:auto}
+.confidence-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,1fr);gap:50px;margin-top:40px}
+.confidence-grid article:where(:not(.reference-site,.reference-site *)){padding-top:24px;border-top:1px solid #d6ddcd}
+.confidence-grid svg:where(:not(.reference-site,.reference-site *)){color:#7c946a;margin-bottom:20px}
+.confidence-grid h3:where(:not(.reference-site,.reference-site *)){font-size:24px}
+.confidence-grid p:where(:not(.reference-site,.reference-site *)){font-size:14px;margin-top:15px}
+.faq-section:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1.5fr;gap:90px;border-top:1px solid #dce1d2}
+.faq-section p:where(:not(.reference-site,.reference-site *)){font-size:14px;margin:23px 0}
+.faq-list [data-slot=accordion-trigger]:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:17px;font-weight:500;padding:22px 0;line-height:1.45;letter-spacing:-.3px}
+.faq-list [data-slot=accordion-content]:where(:not(.reference-site,.reference-site *)){font-size:14px;color:#70816e;line-height:1.8}
+.faq-list [data-slot=accordion-item]:where(:not(.reference-site,.reference-site *)){border-color:#d9e0cf}
+.final-cta:where(:not(.reference-site,.reference-site *)){text-align:center;padding:105px 0;border-top:1px solid #dbe0d1}
+.final-cta .eyebrow:where(:not(.reference-site,.reference-site *)){justify-content:center}
+.final-cta h2:where(:not(.reference-site,.reference-site *)){font-size:clamp(60px,7.5vw,112px);letter-spacing:-.065em}
+.final-cta p:where(:not(.reference-site,.reference-site *)){margin:26px 0;font-size:17px}
+.final-cta .actions:where(:not(.reference-site,.reference-site *)){justify-content:center}
+.final-cta .mono:where(:not(.reference-site,.reference-site *)){display:block;margin-top:28px;font-size:9px;color:#98a18c}
+footer:where(:not(.reference-site,.reference-site *)){background:#eeeFe5;border-top:1px solid #d7ddcb;padding:55px 0 0}
+.footer-top:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;justify-content:space-between;gap:25px;padding-bottom:38px;border-bottom:1px solid #d4ddc8}
+.footer-top p:where(:not(.reference-site,.reference-site *)){font-size:12px}
+.footer-links:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:50px;padding:40px 0}
+.footer-links>div:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;gap:10px;font-size:12px}
+.footer-links .mono:where(:not(.reference-site,.reference-site *)){font-size:9px;color:#829473;margin-bottom:8px}
+.footer-links p:where(:not(.reference-site,.reference-site *)){font-size:12px}
+.text-link:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:7px;text-align:left;font-size:12px;font-weight:600}
+.footer-bottom:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;justify-content:space-between;border-top:1px solid #d4ddc8;padding:22px 0;font-size:10px;color:#8b9980}
+.footer-bottom>div:where(:not(.reference-site,.reference-site *)){display:flex;gap:25px}
+.brief-modal:where(:not(.reference-site,.reference-site *)){background:#fffdf8!important;border-radius:15px!important;padding:32px!important;max-height:90vh;overflow:auto}
+.brief-modal .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:9px;margin-bottom:0}
+.modal-title:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:32px!important;letter-spacing:-1px;line-height:1.15!important}
+.brief-modal [data-slot=dialog-description]:where(:not(.reference-site,.reference-site *)),.brief-modal>p:where(:not(.reference-site,.reference-site *)){font-size:13px;color:#778572;line-height:1.7}
+.brief-modal form:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;gap:10px}
+.brief-modal label:where(:not(.reference-site,.reference-site *)){font-size:12px;font-weight:500;margin-top:5px}
+.brief-modal input:where(:not(.reference-site,.reference-site *)),.brief-modal textarea:where(:not(.reference-site,.reference-site *)){background:#fffefa;font-size:14px;padding:12px;height:auto}
+.brief-modal textarea:where(:not(.reference-site,.reference-site *)){min-height:100px}
+.brief-price:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;padding:13px 0;font-size:12px;gap:10px}
+.saved-message:where(:not(.reference-site,.reference-site *)){font-size:12px;display:flex;gap:6px;color:#567447;align-items:center}
+.concept-features:where(:not(.reference-site,.reference-site *)){list-style:none;padding:0;margin:0;font-size:13px}
+.concept-features li:where(:not(.reference-site,.reference-site *)){display:flex;gap:8px;padding:8px 0}
+.concept-features svg:where(:not(.reference-site,.reference-site *)){width:16px;color:#7c9569}
+.portfolio-page:where(:not(.reference-site,.reference-site *)),.legal-page:where(:not(.reference-site,.reference-site *)){padding-top:60px;padding-bottom:90px;min-height:70vh}
+.back-link:where(:not(.reference-site,.reference-site *)){display:block;font-size:13px;color:#7a8d72;margin-bottom:35px}
+.portfolio-page h1:where(:not(.reference-site,.reference-site *)),.legal-page h1:where(:not(.reference-site,.reference-site *)){font-size:80px}
+.filters:where(:not(.reference-site,.reference-site *)){display:flex;flex-wrap:wrap;gap:12px;margin:40px 0 25px}
+.filters .selected:where(:not(.reference-site,.reference-site *)){background:var(--ink);color:#fff}
+.portfolio-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(3,1fr)}
+.portfolio-art:where(:not(.reference-site,.reference-site *)){height:170px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px;margin:-4px -1px 23px;border-radius:7px;background:#e9eedf;color:#789270}
+.portfolio-art>span:where(:not(.reference-site,.reference-site *)){font:9px "JetBrains Mono"}
+.portfolio-grid .industry-card:nth-child(3n/**/+2) .portfolio-art:where(:not(.reference-site,.reference-site *)){background:#fbecd9;color:#b58b5b}
+.portfolio-grid .industry-card:nth-child(3n) .portfolio-art:where(:not(.reference-site,.reference-site *)){background:#183432;color:#abbe9c}
+.portfolio-grid .industry-card>.mono:where(:not(.reference-site,.reference-site *)){font-size:9px;color:#8c9b80;margin-bottom:12px}
+.card-bottom:where(:not(.reference-site,.reference-site *)){margin-top:25px;padding-top:14px;border-top:1px solid #dee3d4;font-size:12px;display:flex;align-items:center;justify-content:space-between}
+.legal-page:where(:not(.reference-site,.reference-site *)){max-width:850px}
+.legal-page h1:where(:not(.reference-site,.reference-site *)){margin-bottom:40px;font-size:65px}
+.legal-page h3:where(:not(.reference-site,.reference-site *)){margin-top:32px;margin-bottom:15px}
+.legal-page p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.reveal:where(:not(.reference-site,.reference-site *)){animation:enter .6s ease-out both}
+.reveal.visible:where(:not(.reference-site,.reference-site *)){animation:enter .7s ease-out both}
+@keyframes  enter{from{opacity:.4;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes  strike{from{scale:0 1}to{scale:1 1}}
+@keyframes  pulse{50%{box-shadow:0 0 0 5px #6a9e8820}}
+@keyframes  blink{50%{opacity:0}}
+@media (min-width:1600px){.hero:where(:not(.reference-site,.reference-site *)){padding-top:90px}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:98px}
+.hero-grid:where(:not(.reference-site,.reference-site *)){gap:70px}
+.wrap:where(:not(.reference-site,.reference-site *)){width:min(1340px,calc(100% - 120px))}}
+@media (max-width:1100px){.nav-links:where(:not(.reference-site,.reference-site *)){gap:18px;font-size:12px}
+.brand:where(:not(.reference-site,.reference-site *)){font-size:20px}
+.nav-wrap:where(:not(.reference-site,.reference-site *)){width:calc(100% - 50px);gap:15px}
+.wrap:where(:not(.reference-site,.reference-site *)){width:calc(100% - 60px)}
+.hero-grid:where(:not(.reference-site,.reference-site *)){gap:30px;grid-template-columns:1.2fr 1fr}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:69px}
+.hero-copy>p:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.hero .actions .button:where(:not(.reference-site,.reference-site *)){font-size:12px;padding:14px 17px}
+.hero-notes:where(:not(.reference-site,.reference-site *)){flex-wrap:wrap;gap:8px}
+.sprint-card:where(:not(.reference-site,.reference-site *)){padding:20px}
+.section:where(:not(.reference-site,.reference-site *)){padding-top:80px;padding-bottom:80px}
+.industry-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(3,1fr)}
+.journey-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(2,1fr)}
+.pricing-grid:where(:not(.reference-site,.reference-site *)){gap:22px;grid-template-columns:1.6fr 1fr}
+.package-options:where(:not(.reference-site,.reference-site *)){gap:8px}
+.package-option:where(:not(.reference-site,.reference-site *)){padding:16px 12px}
+.package-summary:where(:not(.reference-site,.reference-site *)){padding:22px}
+.summary-total strong:where(:not(.reference-site,.reference-site *)){font-size:47px}
+.capacity-section>.wrap:where(:not(.reference-site,.reference-site *)){gap:35px}
+.capacity-section h2:where(:not(.reference-site,.reference-site *)){font-size:43px}
+.included-strip:where(:not(.reference-site,.reference-site *)){flex-wrap:wrap}
+.faq-section:where(:not(.reference-site,.reference-site *)){gap:40px}
+.section-head>p:where(:not(.reference-site,.reference-site *)){max-width:280px}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){font-size:8px}
+.floating-note:where(:not(.reference-site,.reference-site *)){right:0}
+.footer-top .brand:where(:not(.reference-site,.reference-site *)){font-size:20px}}
+@media (max-width:800px){.site-header .nav-cta:where(:not(.reference-site,.reference-site *)){display:none}
+.menu-toggle:where(:not(.reference-site,.reference-site *)){display:inline-flex}
+.nav-wrap:where(:not(.reference-site,.reference-site *)){height:75px}
+.nav-links:where(:not(.reference-site,.reference-site *)){display:none;position:absolute;top:75px;left:0;right:0;background:#faf7f1;border-bottom:1px solid #ddd;padding:25px 30px;font-size:17px;flex-direction:column;gap:20px}
+.nav-links.is-open:where(:not(.reference-site,.reference-site *)){display:flex}
+.hero:where(:not(.reference-site,.reference-site *)){padding-top:45px}
+.hero-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:25px}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(57px,10.5vw,88px)}
+.hero-copy>p:where(:not(.reference-site,.reference-site *)){max-width:570px;font-size:17px}
+.hero-aside:where(:not(.reference-site,.reference-site *)){width:min(460px,100%);justify-self:center;padding-top:20px}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){font-size:9px}
+.hero .actions .button:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.hero-notes:where(:not(.reference-site,.reference-site *)){font-size:11px;gap:20px}
+.metric-strip:where(:not(.reference-site,.reference-site *)){margin-top:65px;grid-template-columns:repeat(2,1fr);gap:26px;padding:30px 0}
+.metric-strip>div:where(:not(.reference-site,.reference-site *)){padding-left:20px}
+.metric-strip>div:nth-child(3):where(:not(.reference-site,.reference-site *)){border:0;padding-left:0}
+.metric-strip strong:where(:not(.reference-site,.reference-site *)){font-size:32px}
+.section-head:where(:not(.reference-site,.reference-site *)){display:block}
+.section-head>p:where(:not(.reference-site,.reference-site *)){max-width:500px;margin-top:24px}
+.problem-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:15px}
+.problem-card h3:where(:not(.reference-site,.reference-site *)){margin:13px 0;font-size:37px}
+.comparison-card:where(:not(.reference-site,.reference-site *)){padding:24px}
+.compare-row:where(:not(.reference-site,.reference-site *)){font-size:11px;gap:9px}
+.comparison-card h3:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.result:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.three-promises:where(:not(.reference-site,.reference-site *)){gap:20px}
+.pricing-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.package-summary:where(:not(.reference-site,.reference-site *)){position:static}
+.package-options:where(:not(.reference-site,.reference-site *)){gap:12px}
+.package-option:where(:not(.reference-site,.reference-site *)){padding:21px}
+.package-option h4:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.package-option p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.capacity-section>.wrap:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.capacity-section h2:where(:not(.reference-site,.reference-site *)){font-size:49px}
+.confidence-grid:where(:not(.reference-site,.reference-site *)){gap:25px}
+.confidence-grid h3:where(:not(.reference-site,.reference-site *)){font-size:21px}
+.faq-section:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:30px}
+.faq-section h2 br:where(:not(.reference-site,.reference-site *)){display:none}
+.footer-top:where(:not(.reference-site,.reference-site *)){flex-wrap:wrap}
+.footer-top p:where(:not(.reference-site,.reference-site *)){width:100%;order:3}
+.footer-links:where(:not(.reference-site,.reference-site *)){gap:25px}
+.method-row:where(:not(.reference-site,.reference-site *)){font-size:11px;grid-template-columns:1fr 1fr 1.3fr}
+.method-row>*:where(:not(.reference-site,.reference-site *)){padding:15px 13px}
+.industry-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(2,1fr)}
+.portfolio-page h1:where(:not(.reference-site,.reference-site *)){font-size:65px}
+.journey-foot:where(:not(.reference-site,.reference-site *)){flex-wrap:wrap}
+.journey-foot span:where(:not(.reference-site,.reference-site *)){width:45%}
+.final-cta:where(:not(.reference-site,.reference-site *)){padding:80px 0}}
+@media (max-width:480px){.wrap:where(:not(.reference-site,.reference-site *)){width:calc(100% - 36px)}
+.nav-wrap:where(:not(.reference-site,.reference-site *)){width:calc(100% - 36px)}
+.brand:where(:not(.reference-site,.reference-site *)){font-size:21px}
+.brand-mark:where(:not(.reference-site,.reference-site *)){width:34px;height:38px}
+.brand small:where(:not(.reference-site,.reference-site *)){font-size:7px;letter-spacing:2.5px}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:58px;letter-spacing:-.068em}
+.crossed:where(:not(.reference-site,.reference-site *)){font-size:.67em}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){font-size:7px;letter-spacing:.04em;padding:6px 9px;margin-bottom:23px}
+.hero-copy>p:where(:not(.reference-site,.reference-site *)){font-size:15px;margin-top:23px}
+.hero .actions:where(:not(.reference-site,.reference-site *)){gap:10px}
+.hero .actions .button:where(:not(.reference-site,.reference-site *)){font-size:12px;padding:14px 13px;gap:8px}
+.hero-notes:where(:not(.reference-site,.reference-site *)){font-size:9px;gap:13px}
+.hero-aside:where(:not(.reference-site,.reference-site *)){padding:14px 6px 0}
+.sprint-card:where(:not(.reference-site,.reference-site *)){padding:21px}
+.sprint-title:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.hours-display b:where(:not(.reference-site,.reference-site *)){font-size:94px}
+.sprint-top>.mono:where(:not(.reference-site,.reference-site *)){font-size:8px}
+.sprint-top>.status:where(:not(.reference-site,.reference-site *)){font-size:7px}
+.floating-note:where(:not(.reference-site,.reference-site *)){font-size:10px;bottom:-20px;right:3px}
+.metric-strip .mono:where(:not(.reference-site,.reference-site *)){font-size:8px}
+.section:where(:not(.reference-site,.reference-site *)){padding-top:65px;padding-bottom:65px}
+h2:where(:not(.reference-site,.reference-site *)){font-size:39px;letter-spacing:-.06em}
+.eyebrow:where(:not(.reference-site,.reference-site *)){font-size:9px;margin-bottom:20px}
+.section-head:where(:not(.reference-site,.reference-site *)){margin-bottom:30px}
+.section-head>p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.comparison:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:22px;margin-top:32px}
+.vs:where(:not(.reference-site,.reference-site *)){top:50%;z-index:1}
+.compare-row:where(:not(.reference-site,.reference-site *)){font-size:13px;padding:16px 0}
+.comparison-card h3:where(:not(.reference-site,.reference-site *)){font-size:27px}
+.result:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.three-promises:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:23px;margin-top:30px}
+.three-promises>div:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:23px 1fr;gap:0 13px}
+.three-promises p:where(:not(.reference-site,.reference-site *)){grid-column:2}
+.three-promises svg:where(:not(.reference-site,.reference-site *)){grid-row:span 2}
+.timeline-head:where(:not(.reference-site,.reference-site *)){margin-top:30px;flex-direction:column;gap:5px}
+.journey-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.journey-card:where(:not(.reference-site,.reference-site *)){padding:24px}
+.journey-card h3:where(:not(.reference-site,.reference-site *)){font-size:27px}
+.journey-card p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.journey-number:where(:not(.reference-site,.reference-site *)){margin-bottom:14px}
+.your-role p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.deliverables:where(:not(.reference-site,.reference-site *)){flex-direction:row;flex-wrap:wrap;gap:8px 14px}
+.journey-foot:where(:not(.reference-site,.reference-site *)){font-size:10px;gap:16px}
+.method-row:where(:not(.reference-site,.reference-site *)){grid-template-columns:.8fr 1.2fr}
+.method-row>:nth-child(2):where(:not(.reference-site,.reference-site *)){display:none}
+.method-row>*:where(:not(.reference-site,.reference-site *)){padding:16px 12px;font-size:11px}
+.method-row>:last-child:where(:not(.reference-site,.reference-site *)){gap:7px}
+.included-strip:where(:not(.reference-site,.reference-site *)){justify-content:flex-start;gap:17px 25px}
+.included-strip>.mono:where(:not(.reference-site,.reference-site *)){max-width:none;width:100%}
+.included-strip>span:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.industry-grid:where(:not(.reference-site,.reference-site *)){gap:10px}
+.industry-card:where(:not(.reference-site,.reference-site *)){padding:20px 14px}
+.industry-card h3:where(:not(.reference-site,.reference-site *)){font-size:20px}
+.industry-card p:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.industry-top:where(:not(.reference-site,.reference-site *)){margin-bottom:20px}
+.tags:where(:not(.reference-site,.reference-site *)){gap:4px}
+.tags span:where(:not(.reference-site,.reference-site *)){font-size:7px}
+.section-bottom:where(:not(.reference-site,.reference-site *)){align-items:flex-start;flex-direction:column}
+.section-bottom p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.package-options:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.package-option:where(:not(.reference-site,.reference-site *)){min-height:auto;display:grid;grid-template-columns:28px 1fr;gap:6px 12px;padding:17px}
+.package-option>svg:where(:not(.reference-site,.reference-site *)){grid-row:span 2;margin:0}
+.package-option h4:where(:not(.reference-site,.reference-site *)){margin:0;font-size:16px}
+.package-option p:where(:not(.reference-site,.reference-site *)){grid-column:2;font-size:12px}
+.package-option .option-price:where(:not(.reference-site,.reference-site *)){grid-column:2;margin-top:6px}
+.included-pills:where(:not(.reference-site,.reference-site *)){gap:12px 16px;padding:15px}
+.included-pills>.mono:where(:not(.reference-site,.reference-site *)){width:100%}
+.included-pills>span:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.pricing-group:where(:not(.reference-site,.reference-site *)){margin-bottom:25px}
+.summary-total strong:where(:not(.reference-site,.reference-site *)){font-size:56px}
+.capacity-section h2:where(:not(.reference-site,.reference-site *)){font-size:39px}
+.launch-plan:where(:not(.reference-site,.reference-site *)){padding:21px}
+.launch-plan>div:not(.consult):where(:not(.reference-site,.reference-site *)){gap:10px}
+.launch-plan strong:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.launch-plan small:where(:not(.reference-site,.reference-site *)){font-size:9px}
+.confidence-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:20px}
+.confidence-grid h3:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.confidence-grid svg:where(:not(.reference-site,.reference-site *)){margin-bottom:15px}
+.faq-list [data-slot=accordion-trigger]:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.final-cta h2:where(:not(.reference-site,.reference-site *)){font-size:58px}
+.final-cta p:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.final-cta .actions:where(:not(.reference-site,.reference-site *)){flex-direction:column;align-items:center}
+.final-cta .button:where(:not(.reference-site,.reference-site *)){min-width:230px}
+.footer-top .button:where(:not(.reference-site,.reference-site *)){padding:12px 15px;min-height:42px;font-size:12px}
+.footer-top:where(:not(.reference-site,.reference-site *)){gap:22px}
+.footer-links:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr 1fr;gap:30px}
+.footer-links>div:last-child:where(:not(.reference-site,.reference-site *)){grid-column:span 2}
+.footer-bottom:where(:not(.reference-site,.reference-site *)){font-size:9px;gap:15px;align-items:flex-start}
+.footer-bottom>div:where(:not(.reference-site,.reference-site *)){gap:12px;flex-wrap:wrap;justify-content:flex-end}
+.brief-modal:where(:not(.reference-site,.reference-site *)){padding:25px!important}
+.modal-title:where(:not(.reference-site,.reference-site *)){font-size:28px!important}
+.portfolio-page h1:where(:not(.reference-site,.reference-site *)),.legal-page h1:where(:not(.reference-site,.reference-site *)){font-size:53px}
+.portfolio-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.portfolio-art:where(:not(.reference-site,.reference-site *)){height:180px}
+.portfolio-grid .industry-card:where(:not(.reference-site,.reference-site *)){padding:22px}
+.portfolio-grid .industry-card h3:where(:not(.reference-site,.reference-site *)){font-size:27px}
+.portfolio-grid .industry-card p:where(:not(.reference-site,.reference-site *)){font-size:14px}}
+@media (prefers-reduced-motion:reduce){html:where(:not(.reference-site,.reference-site *)){scroll-behavior:auto}
+*:where(:not(.reference-site,.reference-site *)),*:where(:not(.reference-site,.reference-site *)):before,*:where(:not(.reference-site,.reference-site *)):after{animation:none!important;transition:none!important}}
+.reveal:where(:not(.reference-site,.reference-site *)){animation:none}
+.motion-ready:where(:not(.reference-site,.reference-site *)){opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.65,.2,1)}
+.motion-ready.visible:where(:not(.reference-site,.reference-site *)){opacity:1;transform:none;animation:none}
+.hero-copy:where(:not(.reference-site,.reference-site *)){animation:hero-reveal .9s cubic-bezier(.2,.65,.2,1) both}
+.sprint-card:where(:not(.reference-site,.reference-site *)){animation:gentle-float 7s ease-in-out infinite}
+.hero-aside:hover .sprint-card:where(:not(.reference-site,.reference-site *)){animation-play-state:paused}
+.floating-note:where(:not(.reference-site,.reference-site *)){animation:note-float 6s ease-in-out infinite}
+.hero.grid-paper:where(:not(.reference-site,.reference-site *)){background-position:0 0;position:relative}
+.hero:where(:not(.reference-site,.reference-site *)):before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 78% 40%,#ffbb7522,transparent 55%)}
+.hero>.wrap:where(:not(.reference-site,.reference-site *)){position:relative}
+.hero .orange:where(:not(.reference-site,.reference-site *)){background:linear-gradient(100deg,#ef5f17 20%,#ff9d49 50%,#f27026 80%);background-size:200% auto;background-clip:text;-webkit-background-clip:text;color:transparent;animation:orange-light 8s ease-in-out infinite}
+.timeline-bar button:where(:not(.reference-site,.reference-site *)){position:relative;overflow:hidden}
+.timeline-bar button:nth-child(2):where(:not(.reference-site,.reference-site *)):after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent 30%,#fff5,transparent 70%);transform:translateX(-100%);animation:timeline-flow 4s ease-in-out infinite}
+.industry-card:where(:not(.reference-site,.reference-site *)){overflow:hidden;position:relative}
+.industry-card:where(:not(.reference-site,.reference-site *)):before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 100% 0,#ffc49325,transparent 70%);opacity:0;transition:opacity .3s}
+.industry-card:hover:where(:not(.reference-site,.reference-site *)):before{opacity:1}
+.industry-card:hover .industry-icon:where(:not(.reference-site,.reference-site *)){transform:rotate(-8deg) scale(1.1)}
+.industry-icon:where(:not(.reference-site,.reference-site *)){transition:transform .3s}
+.capacity-visual:where(:not(.reference-site,.reference-site *)){min-width:0}
+.capacity-visual>img:where(:not(.reference-site,.reference-site *)){width:100%;height:auto;aspect-ratio:3/2;object-fit:cover;border-radius:16px;display:block;border:1px solid #e4dfd2}
+.visual-caption:where(:not(.reference-site,.reference-site *)){display:block;text-align:center;font:10px "JetBrains Mono";letter-spacing:.12em;color:#829084;padding:13px 0 22px}
+.capacity-visual .launch-plan:where(:not(.reference-site,.reference-site *)){margin-top:0}
+.consent-row:where(:not(.reference-site,.reference-site *)){display:flex;align-items:flex-start;gap:10px;margin:5px 0 12px}
+.consent-row [data-slot=checkbox]:where(:not(.reference-site,.reference-site *)){margin-top:4px;flex-shrink:0}
+.brief-modal .consent-row label:where(:not(.reference-site,.reference-site *)){font-size:12px;line-height:1.6;font-weight:400;margin:0}
+.consent-row a:where(:not(.reference-site,.reference-site *)){text-decoration:underline;text-underline-offset:3px}
+.form-honeypot:where(:not(.reference-site,.reference-site *)){position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);left:-9999px}
+.inquiry-success:where(:not(.reference-site,.reference-site *)){display:flex;align-items:flex-start;gap:12px;background:#eaf1e8;border:1px solid #cdddc5;border-radius:9px;padding:17px;margin-top:8px;color:#3d623e}
+.inquiry-success strong:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.inquiry-success p:where(:not(.reference-site,.reference-site *)){font-size:13px;margin:4px 0}
+.inquiry-success small:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.form-error:where(:not(.reference-site,.reference-site *)){color:#af3a29!important;font-size:13px;padding:12px;background:#ffebe3;border-radius:8px}
+.button:disabled:where(:not(.reference-site,.reference-site *)){transform:none;box-shadow:none;cursor:not-allowed;opacity:.65}
+.intro:where(:not(.reference-site,.reference-site *)),.section-head>p:where(:not(.reference-site,.reference-site *)),.problem-card p:where(:not(.reference-site,.reference-site *)),.confidence-grid p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.journey-card p:where(:not(.reference-site,.reference-site *)),.industry-card p:where(:not(.reference-site,.reference-site *)),.package-option p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.journey-card .your-role p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.package-option:where(:not(.reference-site,.reference-site *)){min-height:265px}
+.tags span:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.option-price:where(:not(.reference-site,.reference-site *)),.deliverables span:where(:not(.reference-site,.reference-site *)){font-size:12px}
+.hero-notes:where(:not(.reference-site,.reference-site *)){font-size:12px}
+.footer-links>div:where(:not(.reference-site,.reference-site *)),.footer-links p:where(:not(.reference-site,.reference-site *)),.footer-top p:where(:not(.reference-site,.reference-site *)),.text-link:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.admin-app:where(:not(.reference-site,.reference-site *)){min-height:100vh;background:#f5f5ef}
+.admin-header:where(:not(.reference-site,.reference-site *)){padding:23px 4vw;border-bottom:1px solid #dce0d5;display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fffef9}
+.admin-header>div:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:25px}
+.owner-badge:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:7px;background:#eaf0e5;color:#608252;border:1px solid #d3dfc9;padding:7px 10px;border-radius:6px;font-size:12px}
+.admin-site-link:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:5px;font-size:13px}
+.admin-main:where(:not(.reference-site,.reference-site *)){width:min(1250px,92%);margin:auto;padding:55px 0}
+.admin-heading:where(:not(.reference-site,.reference-site *)){display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:35px}
+.admin-heading .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:10px;margin-bottom:18px}
+.admin-heading h1:where(:not(.reference-site,.reference-site *)){font-size:54px;letter-spacing:-.065em}
+.admin-heading h1>span:where(:not(.reference-site,.reference-site *)){color:var(--orange)}
+.admin-heading p:where(:not(.reference-site,.reference-site *)){font-size:15px;margin-top:12px}
+.admin-actions:where(:not(.reference-site,.reference-site *)){display:flex;gap:10px;align-items:center}
+.admin-actions .button:where(:not(.reference-site,.reference-site *)){font-size:13px;padding:11px 16px;min-height:40px}
+.admin-actions button:where(:not(.reference-site,.reference-site *)){height:42px}
+.inbox-metrics:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-bottom:33px}
+.inbox-metrics>button:where(:not(.reference-site,.reference-site *)){background:#fffefa;border:1px solid #dce0d3;border-radius:10px;padding:20px 23px;position:relative;text-align:left;transition:.2s}
+.inbox-metrics>button.active:where(:not(.reference-site,.reference-site *)){border-color:#f59158;box-shadow:0 0 0 1px #f59158;background:#fff8ef}
+.inbox-metrics>button>span:first-child:where(:not(.reference-site,.reference-site *)){font-size:13px;color:#7b8972}
+.inbox-metrics strong:where(:not(.reference-site,.reference-site *)){display:block;font:500 41px "Space Grotesk";letter-spacing:-2px;margin-top:10px}
+.metric-icon:where(:not(.reference-site,.reference-site *)){position:absolute;right:22px;bottom:23px;color:#92a881}
+.metric-icon svg:where(:not(.reference-site,.reference-site *)){width:23px}
+.inbox-panel:where(:not(.reference-site,.reference-site *)){background:#fffefa;border:1px solid #dce0d3;border-radius:12px;overflow:hidden}
+.inbox-toolbar:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:20px;justify-content:space-between;padding:23px}
+.inbox-search:where(:not(.reference-site,.reference-site *)){position:relative;max-width:490px;flex:1}
+.inbox-search>svg:where(:not(.reference-site,.reference-site *)){position:absolute;left:12px;top:50%;transform:translateY(-50%);color:#96a48a}
+.inbox-search input:where(:not(.reference-site,.reference-site *)){padding-left:39px;height:42px;font-size:14px;background:#f9faf4}
+.inbox-toolbar>[data-slot=select-trigger]:where(:not(.reference-site,.reference-site *)){width:175px;height:42px;font-size:13px}
+.inbox-list-heading:where(:not(.reference-site,.reference-site *)),.inquiry-row:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:minmax(0,1fr) 130px 125px 125px;gap:15px;align-items:center;padding:15px 24px}
+.inbox-list-heading:where(:not(.reference-site,.reference-site *)){background:#f0f3e9;border-top:1px solid #e4e8dc;border-bottom:1px solid #e4e8dc;font:10px "JetBrains Mono";color:#829370;letter-spacing:.06em}
+.inquiry-row:where(:not(.reference-site,.reference-site *)){width:100%;text-align:left;border-bottom:1px solid #e8ebe1;padding:22px 24px;transition:background .2s}
+.inquiry-row:hover:where(:not(.reference-site,.reference-site *)){background:#fff7ea}
+.inquiry-contact:where(:not(.reference-site,.reference-site *)){display:flex;gap:13px;min-width:0;align-items:flex-start}
+.contact-avatar:where(:not(.reference-site,.reference-site *)){width:38px;height:38px;display:grid;place-items:center;flex-shrink:0;background:#ebefdf;color:#789366;border-radius:10px;font-family:"Space Grotesk";font-size:13px}
+.inquiry-contact>div:where(:not(.reference-site,.reference-site *)){min-width:0}
+.inquiry-contact strong:where(:not(.reference-site,.reference-site *)){font-size:15px;font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis}
+.inquiry-contact>div>span:where(:not(.reference-site,.reference-site *)){font-size:12px;color:#859376;display:block;overflow:hidden;text-overflow:ellipsis}
+.inquiry-contact p:where(:not(.reference-site,.reference-site *)){font-size:13px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#93a083}
+.row-estimate:where(:not(.reference-site,.reference-site *)){font:500 16px "Space Grotesk"}
+.inquiry-status:where(:not(.reference-site,.reference-site *)){width:fit-content;padding:4px 8px;border-radius:5px;font-size:11px;text-transform:capitalize;border:1px solid #dfe5d6;background:#f0f3eb;color:#7b8b6a}
+.status-new:where(:not(.reference-site,.reference-site *)){background:#fff0db;color:#bf7a35;border-color:#f1dabb}
+.status-contacted:where(:not(.reference-site,.reference-site *)){background:#edf3e8;color:#6e8b5e}
+.status-qualified:where(:not(.reference-site,.reference-site *)){background:#dfeee0;color:#3f6c44;border-color:#c2dbbd}
+.status-closed:where(:not(.reference-site,.reference-site *)){background:#e6eceb;color:#647b7a}
+.status-archived:where(:not(.reference-site,.reference-site *)){background:#f1f1ed;color:#949a8a}
+.row-date:where(:not(.reference-site,.reference-site *)){font-size:12px;display:flex;align-items:center;justify-content:space-between;color:#859371}
+.inbox-empty:where(:not(.reference-site,.reference-site *)){min-height:340px;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:45px 20px;gap:14px}
+.empty-icon:where(:not(.reference-site,.reference-site *)){width:70px;height:70px;border-radius:20px;background:#edf1e3;display:grid;place-items:center;color:#95aa7c;margin-bottom:8px}
+.inbox-empty h3:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.inbox-empty p:where(:not(.reference-site,.reference-site *)){max-width:430px;font-size:14px}
+.inbox-empty .button:where(:not(.reference-site,.reference-site *)){font-size:13px;min-height:42px;margin-top:8px}
+.inbox-pagination:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;align-items:center;gap:15px;padding:20px 24px;font-size:12px;color:#8d9b7d;border-top:1px solid #e7ebdd}
+.inbox-pagination>div:where(:not(.reference-site,.reference-site *)){display:flex;gap:8px}
+.inbox-pagination small:where(:not(.reference-site,.reference-site *)){display:block;font-size:10px;margin-top:3px}
+.admin-footnote:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:7px;font-size:11px;color:#8a9e76;padding:22px 0}
+.admin-footnote a:where(:not(.reference-site,.reference-site *)){margin-left:auto;text-decoration:underline;text-underline-offset:3px}
+.inquiry-sheet:where(:not(.reference-site,.reference-site *)){background:#fffdf7!important;max-width:570px!important;width:min(570px,100%)!important;overflow:auto;padding:12px 14px!important;gap:8px!important}
+.inquiry-sheet [data-slot=sheet-title]:where(:not(.reference-site,.reference-site *)){font:600 29px "Space Grotesk";letter-spacing:-1px;line-height:1.25;overflow-wrap:anywhere}
+.inquiry-sheet [data-slot=sheet-description]:where(:not(.reference-site,.reference-site *)){font-size:14px;overflow-wrap:anywhere}
+.inquiry-sheet .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:10px;margin-bottom:15px}
+.inquiry-detail:where(:not(.reference-site,.reference-site *)){padding:0 16px 30px;display:flex;flex-direction:column;gap:13px}
+.detail-meta:where(:not(.reference-site,.reference-site *)){display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;padding:15px 0;border-bottom:1px solid #e0e6d6;font-size:11px;color:#8b9c77}
+.detail-meta b:where(:not(.reference-site,.reference-site *)){color:#60744c;font-weight:500}
+.inquiry-detail h3:where(:not(.reference-site,.reference-site *)){font-size:18px;margin-top:12px}
+.project-message:where(:not(.reference-site,.reference-site *)){white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.8;color:#536549}
+.package-detail:where(:not(.reference-site,.reference-site *)){padding-left:17px;font-size:13px;color:#71885d;margin:0}
+.package-detail li:where(:not(.reference-site,.reference-site *)){padding:4px 0}
+.inquiry-detail>.button:where(:not(.reference-site,.reference-site *)){font-size:14px;min-height:46px}
+.detail-divider:where(:not(.reference-site,.reference-site *)){border-top:1px solid #e1e7d7;margin:12px 0}
+.inquiry-detail>label:where(:not(.reference-site,.reference-site *)){font-size:14px;font-weight:500}
+.inquiry-detail textarea:where(:not(.reference-site,.reference-site *)){min-height:150px;font-size:14px;background:#fffef9}
+.inquiry-detail>small:where(:not(.reference-site,.reference-site *)){font-size:11px;color:#8fa07c}
+.inquiry-detail [data-slot=select-trigger]:where(:not(.reference-site,.reference-site *)){width:100%;height:42px}
+.save-status:where(:not(.reference-site,.reference-site *)){font-size:13px;color:#697d55}
+.inquiry-reference:where(:not(.reference-site,.reference-site *)){overflow-wrap:anywhere;line-height:1.6}
+.admin-access:where(:not(.reference-site,.reference-site *)){width:min(650px,90%);margin:100px auto}
+.admin-access h1:where(:not(.reference-site,.reference-site *)){font-size:48px;margin:30px 0}
+.admin-access p:where(:not(.reference-site,.reference-site *)){margin:20px 0}
+.spin:where(:not(.reference-site,.reference-site *)){animation:spin 1.2s linear infinite}
+@keyframes  spin{to{transform:rotate(360deg)}}
+@keyframes  hero-reveal{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes  gentle-float{0%,100%{transform:translateY(0) rotate(1deg)}50%{transform:translateY(-9px) rotate(.3deg)}}
+@keyframes  note-float{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(5px) rotate(-2deg)}}
+@keyframes  orange-light{0%,100%{background-position:0% center}50%{background-position:100% center}}
+@keyframes  timeline-flow{0%,20%{transform:translateX(-100%)}70%,100%{transform:translateX(100%)}}
+@media (max-width:1100px){.industry-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(3,1fr)}
+.package-option p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.inbox-list-heading:where(:not(.reference-site,.reference-site *)),.inquiry-row:where(:not(.reference-site,.reference-site *)){grid-template-columns:minmax(0,1fr) 105px 95px 90px;gap:10px}
+.capacity-section>.wrap:where(:not(.reference-site,.reference-site *)){align-items:center}}
+@media (max-width:800px){.admin-heading:where(:not(.reference-site,.reference-site *)){align-items:flex-start;flex-direction:column;gap:25px}
+.admin-main:where(:not(.reference-site,.reference-site *)){padding:35px 0}
+.inbox-metrics:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(2,1fr)}
+.inbox-list-heading:where(:not(.reference-site,.reference-site *)),.inquiry-row:where(:not(.reference-site,.reference-site *)){grid-template-columns:minmax(0,1fr) 95px 100px}
+.inbox-list-heading>span:last-child:where(:not(.reference-site,.reference-site *)),.row-date:where(:not(.reference-site,.reference-site *)){display:none}
+.admin-header .owner-badge:where(:not(.reference-site,.reference-site *)){display:none}
+.admin-header .brand:where(:not(.reference-site,.reference-site *)){font-size:21px}
+.capacity-visual:where(:not(.reference-site,.reference-site *)){max-width:620px;width:100%;margin:auto}
+.industry-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(2,1fr)}
+.package-option:where(:not(.reference-site,.reference-site *)){min-height:260px}}
+@media (max-width:480px){.intro:where(:not(.reference-site,.reference-site *)),.section-head>p:where(:not(.reference-site,.reference-site *)),.problem-card p:where(:not(.reference-site,.reference-site *)),.confidence-grid p:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.industry-card p:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.industry-card h3:where(:not(.reference-site,.reference-site *)){font-size:20px}
+.tags span:where(:not(.reference-site,.reference-site *)){font-size:9px}
+.hero-notes:where(:not(.reference-site,.reference-site *)){flex-direction:column;gap:7px;font-size:11px}
+.package-option:where(:not(.reference-site,.reference-site *)){min-height:auto}
+.package-option p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.admin-header:where(:not(.reference-site,.reference-site *)){padding:19px 4vw;gap:10px}
+.admin-header .brand:where(:not(.reference-site,.reference-site *)){font-size:18px}
+.admin-header .brand small:where(:not(.reference-site,.reference-site *)){font-size:6px;letter-spacing:2px}
+.admin-site-link:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.admin-heading h1:where(:not(.reference-site,.reference-site *)){font-size:44px}
+.inbox-metrics:where(:not(.reference-site,.reference-site *)){gap:12px}
+.inbox-metrics>button:where(:not(.reference-site,.reference-site *)){padding:16px}
+.inbox-metrics>button>span:first-child:where(:not(.reference-site,.reference-site *)){font-size:12px}
+.inbox-metrics strong:where(:not(.reference-site,.reference-site *)){font-size:35px}
+.metric-icon:where(:not(.reference-site,.reference-site *)){right:15px;bottom:18px}
+.metric-icon svg:where(:not(.reference-site,.reference-site *)){width:19px}
+.inbox-toolbar:where(:not(.reference-site,.reference-site *)){padding:16px;flex-direction:column;align-items:stretch;gap:12px}
+.inbox-toolbar>[data-slot=select-trigger]:where(:not(.reference-site,.reference-site *)){width:100%}
+.inbox-search:where(:not(.reference-site,.reference-site *)){max-width:none}
+.inbox-list-heading:where(:not(.reference-site,.reference-site *)){display:none}
+.inquiry-row:where(:not(.reference-site,.reference-site *)){grid-template-columns:minmax(0,1fr) auto;gap:10px;padding:18px 15px}
+.inquiry-contact:where(:not(.reference-site,.reference-site *)){grid-column:span 2}
+.row-estimate:where(:not(.reference-site,.reference-site *)){padding-left:51px;font-size:14px}
+.inquiry-status:where(:not(.reference-site,.reference-site *)){justify-self:end}
+.inquiry-contact strong:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.inquiry-contact p:where(:not(.reference-site,.reference-site *)){font-size:12px}
+.inbox-empty h3:where(:not(.reference-site,.reference-site *)){font-size:24px}
+.inbox-empty p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.inbox-pagination:where(:not(.reference-site,.reference-site *)){padding:16px}
+.inquiry-sheet:where(:not(.reference-site,.reference-site *)){padding:10px 4px!important}
+.admin-footnote:where(:not(.reference-site,.reference-site *)){align-items:flex-start;font-size:10px}
+.admin-footnote span:where(:not(.reference-site,.reference-site *)){overflow-wrap:anywhere}
+.visual-caption:where(:not(.reference-site,.reference-site *)){font-size:8px}
+.capacity-visual>img:where(:not(.reference-site,.reference-site *)){border-radius:12px}
+.consent-row [data-slot=checkbox]:where(:not(.reference-site,.reference-site *)){min-width:18px;min-height:18px}
+.brief-modal .consent-row label:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.footer-bottom:where(:not(.reference-site,.reference-site *)){flex-wrap:wrap}
+.footer-bottom>div:where(:not(.reference-site,.reference-site *)){justify-content:flex-start}
+.portfolio-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.motion-ready:where(:not(.reference-site,.reference-site *)){opacity:1;transform:none}
+.hero .orange:where(:not(.reference-site,.reference-site *)){color:var(--orange);background:none}
+*:where(:not(.reference-site,.reference-site *)),*:where(:not(.reference-site,.reference-site *)):before,*:where(:not(.reference-site,.reference-site *)):after{animation:none!important;transition:none!important}
+html:where(:not(.reference-site,.reference-site *)){scroll-behavior:auto}}
+:root:where(:not(.reference-site,.reference-site *)){--orange:#f5ce00;--ink:#161616;--paper:#fafafa;--background:#fafafa;--foreground:#161616;--primary:#f5ce00;--primary-foreground:#161616;--accent:#fff9d5;--accent-foreground:#161616;--ring:#c7a700;--muted-foreground:#6c6c6c;--border:#dedede;--input:#d8d8d8}
+body:where(:not(.reference-site,.reference-site *)){background:var(--paper);color:var(--ink)}
+.orange:where(:not(.reference-site,.reference-site *)){color:#a18400}
+.orange-btn:where(:not(.reference-site,.reference-site *)){background:#f5ce00;border-color:#f5ce00;color:#161616;box-shadow:0 7px 18px #c5a80022}
+.orange-btn:hover:where(:not(.reference-site,.reference-site *)){background:#ffe124;box-shadow:0 10px 23px #baa00029}
+.dark:where(:not(.reference-site,.reference-site *)){background:#161616}
+.outline:where(:not(.reference-site,.reference-site *)){border-color:#c8c8c8}
+.site-header:where(:not(.reference-site,.reference-site *)){background:#ffffffed}
+.nav-wrap:where(:not(.reference-site,.reference-site *)){height:108px;gap:24px}
+.nav-links:where(:not(.reference-site,.reference-site *)){gap:23px}
+.brand-image:where(:not(.reference-site,.reference-site *)){width:132px;height:95px;display:flex;justify-content:center;overflow:hidden;flex-shrink:0;letter-spacing:normal}
+.brand-image img:where(:not(.reference-site,.reference-site *)){width:132px;height:auto;display:block;mix-blend-mode:multiply}
+.brand-image:where(:not(.reference-site,.reference-site *)):after{display:none}
+.footer-top .brand-image:where(:not(.reference-site,.reference-site *)){width:184px;height:155px}
+.footer-top .brand-image img:where(:not(.reference-site,.reference-site *)){width:184px}
+.admin-header .brand-image:where(:not(.reference-site,.reference-site *)){width:116px;height:95px}
+.admin-header .brand-image img:where(:not(.reference-site,.reference-site *)){width:116px}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(59px,6vw,88px)}
+.hero .crossed:where(:not(.reference-site,.reference-site *)){font-size:.64em;letter-spacing:-.04em}
+.hero .orange:where(:not(.reference-site,.reference-site *)){background:linear-gradient(100deg,#b99800 20%,#e6bd00 50%,#ac8c00 80%);background-size:200% auto;background-clip:text;-webkit-background-clip:text;color:transparent}
+.hero:where(:not(.reference-site,.reference-site *)):before{background:radial-gradient(ellipse at 78% 40%,#ffe44722,transparent 55%)}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){background:#fff9d5;border-color:#e8dc94;color:#796c2e}
+.hero-copy>p:where(:not(.reference-site,.reference-site *)){color:#585858}
+.sprint-card:where(:not(.reference-site,.reference-site *)){background:white;border-color:#dedede}
+.sprint-track button:where(:not(.reference-site,.reference-site *)){background:#fafafa;color:#747474;border-color:#e0e0e0}
+.sprint-track .active:where(:not(.reference-site,.reference-site *)){background:#fff7ca;color:#6c5900}
+.sprint-title:where(:not(.reference-site,.reference-site *)){color:#161616}
+.hours-display b:where(:not(.reference-site,.reference-site *)){color:#baa000}
+.terminal:where(:not(.reference-site,.reference-site *)){background:#1d1d1d}
+.terminal b:where(:not(.reference-site,.reference-site *)),.terminal p>span:where(:not(.reference-site,.reference-site *)){color:#e4d77f}
+.floating-note:where(:not(.reference-site,.reference-site *)){background:#fff7c6;border-color:#e6d78d}
+.grid-paper:where(:not(.reference-site,.reference-site *)){background-image:linear-gradient(#16161608 1px,transparent 1px),linear-gradient(90deg,#16161608 1px,transparent 1px)}
+.eyebrow:where(:not(.reference-site,.reference-site *)){color:#757575}
+.metric-strip .mono:where(:not(.reference-site,.reference-site *)){color:#717171}
+.split-section:where(:not(.reference-site,.reference-site *)),.pricing-section:where(:not(.reference-site,.reference-site *)),footer:where(:not(.reference-site,.reference-site *)){background:#f1f1ed}
+.comparison-card.new:where(:not(.reference-site,.reference-site *)),.speed-section:where(:not(.reference-site,.reference-site *)){background:#171717}
+.new .result:where(:not(.reference-site,.reference-site *)),.new .step-num:where(:not(.reference-site,.reference-site *)),.new .compare-row b:where(:not(.reference-site,.reference-site *)),.comparison-card.new>.mono:where(:not(.reference-site,.reference-site *)){color:#f0d96b}
+.method-row>:last-child:where(:not(.reference-site,.reference-site *)){background:#ffffff07;color:#eeeeea}
+.method-row svg:where(:not(.reference-site,.reference-site *)){color:#ead65d}
+.speed-section .eyebrow:where(:not(.reference-site,.reference-site *)),.speed-section .section-head>p:where(:not(.reference-site,.reference-site *)){color:#b0b0a8}
+.problem-card:where(:not(.reference-site,.reference-site *)){background:#fff;border-color:#deded9}
+.problem-card>.mono:where(:not(.reference-site,.reference-site *)){color:#9a8428}
+.problem-card h3:where(:not(.reference-site,.reference-site *)){color:#81764d}
+.three-promises svg:where(:not(.reference-site,.reference-site *)),.industry-icon:where(:not(.reference-site,.reference-site *)){color:#877a30}
+.journey-card:where(:not(.reference-site,.reference-site *)){background:#fff;border-color:#deded9}
+.journey-card.highlight:where(:not(.reference-site,.reference-site *)){background:#fffbed;border-color:#dac55d}
+.timeline-bar button:nth-child(2):where(:not(.reference-site,.reference-site *)){color:#161616}
+.package-option.chosen:where(:not(.reference-site,.reference-site *)){background:#fffbe7;border-color:#dac027;box-shadow:0 0 0 1px #dac027}
+.package-option.chosen>.option-price:where(:not(.reference-site,.reference-site *)),.package-option.chosen>svg:where(:not(.reference-site,.reference-site *)){color:#8d7900}
+.package-option:hover:not(.base-option):where(:not(.reference-site,.reference-site *)){border-color:#c1a90d}
+.capacity-section:where(:not(.reference-site,.reference-site *)){background:#fff}
+.capacity-visual>img:where(:not(.reference-site,.reference-site *)){filter:saturate(.25);border-color:#e0e0d8}
+.portfolio-art:where(:not(.reference-site,.reference-site *)){background:#eeeee9;color:#777862}
+.portfolio-grid .industry-card:nth-child(3n/**/+2) .portfolio-art:where(:not(.reference-site,.reference-site *)){background:#fff7c5;color:#978127}
+.portfolio-grid .industry-card:nth-child(3n) .portfolio-art:where(:not(.reference-site,.reference-site *)){background:#242424;color:#e4d674}
+.footer-links .mono:where(:not(.reference-site,.reference-site *)),.footer-bottom:where(:not(.reference-site,.reference-site *)){color:#77786f}
+.nav-links a:where(:not(.reference-site,.reference-site *)):after,.crossed:where(:not(.reference-site,.reference-site *)):after{background:#e3be00}
+.service-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.service-card:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;position:relative;padding:31px;border:1px solid #deded8;background:#fff;border-radius:13px;transition:transform .25s,border-color .25s,box-shadow .25s;overflow:hidden}
+.service-card:where(:not(.reference-site,.reference-site *)):after{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:#edce34;transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.service-card:hover:where(:not(.reference-site,.reference-site *)):after{transform:scaleX(1)}
+.service-card:hover:where(:not(.reference-site,.reference-site *)){transform:translateY(-5px);border-color:#d6c674;box-shadow:0 15px 35px #16161609}
+.service-card-top:where(:not(.reference-site,.reference-site *)){display:flex;justify-content:space-between;gap:20px;color:#a08f42;margin-bottom:38px}
+.service-card-top .mono:where(:not(.reference-site,.reference-site *)){font-size:11px;color:#828278}
+.service-card h3:where(:not(.reference-site,.reference-site *)){font-size:29px;margin-bottom:18px;max-width:260px}
+.service-card p:where(:not(.reference-site,.reference-site *)){font-size:15px;color:#74746b;line-height:1.8;flex:1}
+.service-link:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:28px;padding-top:18px;border-top:1px solid #e5e5dc;font-size:13px;font-weight:500;color:#37372f}
+.service-link svg:where(:not(.reference-site,.reference-site *)){transition:transform .25s}
+.service-card:hover .service-link svg:where(:not(.reference-site,.reference-site *)){transform:translate(3px,-3px)}
+.page-hero:where(:not(.reference-site,.reference-site *)){padding:80px 0 85px;border-bottom:1px solid #e0e0d8}
+.page-hero h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(52px,6.8vw,96px);max-width:1050px;letter-spacing:-.065em}
+.page-hero>.wrap>p:where(:not(.reference-site,.reference-site *)){max-width:720px;font-size:19px;line-height:1.8;margin-top:30px;color:#66665f}
+.page-hero .actions:where(:not(.reference-site,.reference-site *)){margin-top:32px}
+.page-hero .back-link:where(:not(.reference-site,.reference-site *)){font-size:13px;margin-bottom:32px;color:#7b7b71}
+.page-hero .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:11px;margin-bottom:27px}
+.detail-hero:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1.55fr 1fr;gap:80px;align-items:center}
+.detail-hero h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(50px,5.2vw,75px);line-height:1.06}
+.detail-hero>div>p:where(:not(.reference-site,.reference-site *)){font-size:17px;margin:26px 0 30px;max-width:650px}
+.service-overview:where(:not(.reference-site,.reference-site *)){background:#191919;color:#fff;border-radius:15px;padding:34px;box-shadow:0 15px 40px #16161614;position:relative}
+.service-overview>svg:where(:not(.reference-site,.reference-site *)){color:#f5ce00;margin-bottom:35px}
+.service-overview .mono:where(:not(.reference-site,.reference-site *)){display:block;color:#b7b3a1;font-size:10px;margin-bottom:15px}
+.service-overview h3:where(:not(.reference-site,.reference-site *)){font-size:32px;line-height:1.15}
+.service-overview>p:where(:not(.reference-site,.reference-site *)){font-size:15px!important;color:#bcbcb2;margin:20px 0 30px!important}
+.service-overview>div:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:8px;font-size:13px;margin:14px 0;color:#d8d8ce}
+.service-overview>div svg:where(:not(.reference-site,.reference-site *)){color:#d7c365}
+.service-detail:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1fr;gap:90px}
+.service-detail>div>p:where(:not(.reference-site,.reference-site *)){font-size:17px;margin-top:25px}
+.outcome-note:where(:not(.reference-site,.reference-site *)){border-left:3px solid #e9cc39;padding:16px 25px;margin-top:30px;background:#fffbea}
+.outcome-note .mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#8c8155}
+.outcome-note p:where(:not(.reference-site,.reference-site *)){font-size:16px;margin-top:12px;color:#64604b}
+.deliverable-panel:where(:not(.reference-site,.reference-site *)){border:1px solid #deded5;background:#fff;border-radius:12px;padding:29px}
+.deliverable-panel>div:not(.eyebrow):where(:not(.reference-site,.reference-site *)){display:flex;gap:20px;padding:25px 0;border-top:1px solid #e8e8de}
+.deliverable-panel>div>span:where(:not(.reference-site,.reference-site *)){font:12px "JetBrains Mono";color:#b2a454;flex-shrink:0;padding-top:4px}
+.deliverable-panel h3:where(:not(.reference-site,.reference-site *)){font-size:23px;line-height:1.4;letter-spacing:-.03em}
+.use-case-section:where(:not(.reference-site,.reference-site *)),.fit-section:where(:not(.reference-site,.reference-site *)){padding:80px 0;background:#eeefe9;border-block:1px solid #ddded4}
+.example-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:40px}
+.example-grid article:where(:not(.reference-site,.reference-site *)){padding:28px;background:#fff;border:1px solid #deded2;border-radius:10px;display:flex;flex-direction:column}
+.example-grid .mono:where(:not(.reference-site,.reference-site *)){font-size:11px;color:#a79a51}
+.example-grid p:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:23px;line-height:1.45;letter-spacing:-.025em;color:#414237;margin:22px 0;flex:1}
+.example-grid svg:where(:not(.reference-site,.reference-site *)){align-self:flex-end;color:#a89a4c}
+.scope-note:where(:not(.reference-site,.reference-site *)){font-size:13px;margin-top:30px;max-width:850px}
+.mini-process:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:38px}
+.mini-process>div:where(:not(.reference-site,.reference-site *)){border-top:2px solid #e1d89d;padding-top:24px}
+.mini-process .mono:where(:not(.reference-site,.reference-site *)){font-size:12px;color:#b09b42}
+.mini-process h3:where(:not(.reference-site,.reference-site *)){font-size:28px;margin:18px 0 12px}
+.mini-process p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.mini-process+.text-link:where(:not(.reference-site,.reference-site *)){margin-top:30px}
+.page-cta:where(:not(.reference-site,.reference-site *)){padding-top:80px;padding-bottom:80px;display:grid;grid-template-columns:1.45fr 1fr;gap:60px;align-items:center}
+.page-cta h2:where(:not(.reference-site,.reference-site *)){font-size:clamp(39px,4vw,59px)}
+.page-cta>div>p:where(:not(.reference-site,.reference-site *)){font-size:17px;margin-bottom:27px}
+.fit-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px;margin-top:40px}
+.fit-grid article>svg:where(:not(.reference-site,.reference-site *)){color:#a59748;margin-bottom:25px}
+.fit-grid h3:where(:not(.reference-site,.reference-site *)){font-size:28px;margin-bottom:18px;line-height:1.2}
+.fit-grid p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.about-story:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1fr;gap:80px}
+.about-story p:where(:not(.reference-site,.reference-site *)){font-size:18px;line-height:1.85;margin-bottom:23px}
+.about-principles:where(:not(.reference-site,.reference-site *)){padding:80px 0;background:#191919;color:#f4f4ea}
+.about-principles p:where(:not(.reference-site,.reference-site *)){color:#b3b3a6}
+.about-principles .eyebrow:where(:not(.reference-site,.reference-site *)){color:#b3b3a6}
+.about-principles .fit-grid:where(:not(.reference-site,.reference-site *)){margin-top:35px}
+.about-principles article>svg:where(:not(.reference-site,.reference-site *)){color:#e1c64e}
+.process-step:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:100px 1.4fr 1fr;gap:45px;padding:65px 0;border-top:1px solid #dadad1;align-items:start}
+.process-step:first-child:where(:not(.reference-site,.reference-site *)){padding-top:0;border:0}
+.process-step:last-child:where(:not(.reference-site,.reference-site *)){padding-bottom:0}
+.process-big:where(:not(.reference-site,.reference-site *)){font:500 82px "Space Grotesk";line-height:1;color:#d6ccb0;letter-spacing:-6px}
+.process-step .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:10px;text-transform:uppercase}
+.process-step h2:where(:not(.reference-site,.reference-site *)){font-size:43px}
+.process-step>div>p:where(:not(.reference-site,.reference-site *)){font-size:17px;margin-top:22px}
+.process-step>aside:where(:not(.reference-site,.reference-site *)){padding:29px;background:#f0f0e8;border-radius:10px;border:1px solid #e0e0d3}
+.process-step aside h3:where(:not(.reference-site,.reference-site *)){font-size:22px;margin-bottom:21px}
+.process-step aside p:where(:not(.reference-site,.reference-site *)){font-size:14px;display:flex;gap:9px;align-items:flex-start;margin:13px 0}
+.process-step aside svg:where(:not(.reference-site,.reference-site *)){margin-top:5px;color:#a09239}
+.process-output:where(:not(.reference-site,.reference-site *)){border-top:1px solid #deded3;margin-top:26px;padding-top:20px}
+.process-output .mono:where(:not(.reference-site,.reference-site *)){display:block;font-size:10px;color:#99906a;margin-bottom:12px}
+.process-output strong:where(:not(.reference-site,.reference-site *)){font-size:15px;font-weight:500}
+.resource-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:26px}
+.resource-card:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;border:1px solid #dfdfd5;background:#fff;border-radius:12px;padding:23px;transition:transform .25s}
+.resource-card:hover:where(:not(.reference-site,.reference-site *)){transform:translateY(-5px)}
+.resource-art:where(:not(.reference-site,.reference-site *)){background:#edeee6;border-radius:7px;padding:30px;height:175px;display:flex;align-items:center;justify-content:space-between;gap:18px;color:#929475;margin-bottom:27px}
+.resource-art>span:where(:not(.reference-site,.reference-site *)){font:10px "JetBrains Mono";max-width:70px;line-height:1.7}
+.resource-card:nth-child(2) .resource-art:where(:not(.reference-site,.reference-site *)){background:#ffef9e;color:#8b7728}
+.resource-card:nth-child(3) .resource-art:where(:not(.reference-site,.reference-site *)){background:#242424;color:#e6d573}
+.resource-card>.mono:where(:not(.reference-site,.reference-site *)){font-size:9px;color:#8a8a79}
+.resource-card h2:where(:not(.reference-site,.reference-site *)){font-size:33px;line-height:1.14;letter-spacing:-.045em;margin:16px 0 22px}
+.resource-card p:where(:not(.reference-site,.reference-site *)){font-size:15px;flex:1}
+.article-hero .wrap:where(:not(.reference-site,.reference-site *)){max-width:1070px}
+.article-hero h1:where(:not(.reference-site,.reference-site *)){max-width:950px;font-size:clamp(48px,5vw,77px)}
+.article-layout:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:270px 1fr;gap:90px;max-width:1070px;padding-top:70px;padding-bottom:90px;align-items:start}
+.article-layout>aside:where(:not(.reference-site,.reference-site *)){position:sticky;top:145px;display:flex;flex-direction:column;gap:18px;border-top:2px solid #dccc7c;padding-top:22px}
+.article-layout>aside>.mono:where(:not(.reference-site,.reference-site *)){font-size:10px;color:#94907c;margin-bottom:10px}
+.article-layout>aside>a:where(:not(.reference-site,.reference-site *)){font-size:13px;color:#787867;line-height:1.65}
+.article-layout>aside>a:hover:where(:not(.reference-site,.reference-site *)){color:#161616}
+.article-layout article section:where(:not(.reference-site,.reference-site *)){padding-bottom:45px;scroll-margin-top:135px}
+.article-layout article section>.mono:where(:not(.reference-site,.reference-site *)){font-size:12px;color:#ad9c47}
+.article-layout article h2:where(:not(.reference-site,.reference-site *)){font-size:33px;line-height:1.2;letter-spacing:-.04em;margin:13px 0 22px}
+.article-layout article p:where(:not(.reference-site,.reference-site *)){font-size:17px;line-height:1.9;color:#66665c}
+.article-end:where(:not(.reference-site,.reference-site *)){padding:30px;background:#fff9d9;border:1px solid #e3d793;border-radius:10px}
+.article-end h3:where(:not(.reference-site,.reference-site *)){font-size:27px}
+.article-end p:where(:not(.reference-site,.reference-site *)){font-size:16px!important;margin:15px 0 25px}
+.contact-layout:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1.5fr 1fr;gap:70px;align-items:center}
+.contact-layout h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(50px,5.2vw,76px)}
+.contact-layout>div>p:where(:not(.reference-site,.reference-site *)){font-size:17px;margin:28px 0;max-width:620px}
+.contact-layout .contact-note:where(:not(.reference-site,.reference-site *)){font-size:12px;color:#939382;margin:18px 0 0}
+.contact-guide:where(:not(.reference-site,.reference-site *)){padding:33px;background:#fff;border:1px solid #e1e1d7;border-radius:12px}
+.contact-guide .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:9px}
+.contact-guide>div:not(.eyebrow):where(:not(.reference-site,.reference-site *)){padding:16px 0;border-top:1px solid #e6e6db}
+.contact-guide h3:where(:not(.reference-site,.reference-site *)){font-size:24px;margin-bottom:8px}
+.contact-guide p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.contact-guide>p:where(:not(.reference-site,.reference-site *)){font-size:12px;margin-top:20px}
+.admin-heading h1>span:where(:not(.reference-site,.reference-site *)){color:#b39800}
+.inbox-metrics>button.active:where(:not(.reference-site,.reference-site *)){background:#fffbe0;border-color:#d8bd2b;box-shadow:0 0 0 1px #d8bd2b}
+.inquiry-row:hover:where(:not(.reference-site,.reference-site *)){background:#fffcec}
+.brief-modal:where(:not(.reference-site,.reference-site *)){background:#fff!important}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.hero .actions .button:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.footer-top:where(:not(.reference-site,.reference-site *)){align-items:center}
+.logo-panel:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:20px}
+@media (max-width:1100px){.nav-links:where(:not(.reference-site,.reference-site *)){gap:16px;font-size:12px}
+.nav-wrap:where(:not(.reference-site,.reference-site *)){gap:16px}
+.brand-image:where(:not(.reference-site,.reference-site *)){width:110px;height:93px}
+.brand-image img:where(:not(.reference-site,.reference-site *)){width:110px}
+.service-card:where(:not(.reference-site,.reference-site *)){padding:25px}
+.service-card h3:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.detail-hero:where(:not(.reference-site,.reference-site *)){gap:35px}
+.service-detail:where(:not(.reference-site,.reference-site *)){gap:40px}
+.service-overview:where(:not(.reference-site,.reference-site *)){padding:27px}
+.process-step:where(:not(.reference-site,.reference-site *)){grid-template-columns:70px 1.3fr 1fr;gap:25px}
+.process-big:where(:not(.reference-site,.reference-site *)){font-size:65px}
+.process-step h2:where(:not(.reference-site,.reference-site *)){font-size:36px}
+.article-layout:where(:not(.reference-site,.reference-site *)){gap:45px;grid-template-columns:230px 1fr}
+.contact-layout:where(:not(.reference-site,.reference-site *)){gap:35px}}
+@media (max-width:800px){.nav-wrap:where(:not(.reference-site,.reference-site *)){height:96px}
+.nav-links:where(:not(.reference-site,.reference-site *)){top:96px;font-size:16px;background:#fff}
+.brand-image:where(:not(.reference-site,.reference-site *)){width:105px;height:89px}
+.brand-image img:where(:not(.reference-site,.reference-site *)){width:105px}
+.service-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(2,minmax(0,1fr))}
+.page-hero:where(:not(.reference-site,.reference-site *)){padding:55px 0 60px}
+.page-hero>.wrap>p:where(:not(.reference-site,.reference-site *)){font-size:17px}
+.detail-hero:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:35px}
+.service-overview:where(:not(.reference-site,.reference-site *)){max-width:600px}
+.service-detail:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:35px}
+.example-grid:where(:not(.reference-site,.reference-site *)){gap:15px}
+.example-grid article:where(:not(.reference-site,.reference-site *)){padding:21px}
+.example-grid p:where(:not(.reference-site,.reference-site *)){font-size:21px}
+.mini-process:where(:not(.reference-site,.reference-site *)){grid-template-columns:repeat(2,minmax(0,1fr));gap:35px}
+.page-cta:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:25px;padding-block:65px}
+.fit-grid:where(:not(.reference-site,.reference-site *)){gap:25px}
+.fit-grid h3:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.about-story:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:25px}
+.process-step:where(:not(.reference-site,.reference-site *)){grid-template-columns:70px 1fr;gap:22px}
+.process-step aside:where(:not(.reference-site,.reference-site *)){grid-column:2}
+.resource-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;max-width:670px}
+.resource-card:where(:not(.reference-site,.reference-site *)){padding:27px}
+.resource-card h2:where(:not(.reference-site,.reference-site *)){font-size:36px}
+.resource-art:where(:not(.reference-site,.reference-site *)){height:190px}
+.resource-card>.mono:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.article-layout:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:30px}
+.article-layout>aside:where(:not(.reference-site,.reference-site *)){position:static;display:none}
+.article-hero h1:where(:not(.reference-site,.reference-site *)){font-size:57px}
+.contact-layout:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:35px}
+.contact-guide:where(:not(.reference-site,.reference-site *)){max-width:650px}
+.footer-top .brand-image:where(:not(.reference-site,.reference-site *)){width:150px;height:126px}
+.footer-top .brand-image img:where(:not(.reference-site,.reference-site *)){width:150px}}
+@media (max-width:480px){.hero h1:where(:not(.reference-site,.reference-site *)){font-size:55px}
+.hero .crossed:where(:not(.reference-site,.reference-site *)){font-size:.60em}
+.hero-copy>.eyebrow:where(:not(.reference-site,.reference-site *)){font-size:8px;letter-spacing:0}
+.hero .actions .button:where(:not(.reference-site,.reference-site *)){font-size:13px}
+.service-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:15px}
+.service-card:where(:not(.reference-site,.reference-site *)){padding:26px}
+.service-card h3:where(:not(.reference-site,.reference-site *)){font-size:29px;max-width:none}
+.service-card p:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.service-card-top:where(:not(.reference-site,.reference-site *)){margin-bottom:27px}
+.service-card-top .mono:where(:not(.reference-site,.reference-site *)){font-size:11px}
+.page-hero:where(:not(.reference-site,.reference-site *)){padding:45px 0 50px}
+.page-hero h1:where(:not(.reference-site,.reference-site *)){font-size:49px;line-height:1.06}
+.page-hero .eyebrow:where(:not(.reference-site,.reference-site *)){font-size:9px}
+.page-hero>.wrap>p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.detail-hero h1:where(:not(.reference-site,.reference-site *)){font-size:45px}
+.detail-hero>div>p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.service-overview h3:where(:not(.reference-site,.reference-site *)){font-size:31px}
+.service-overview:where(:not(.reference-site,.reference-site *)){padding:26px}
+.service-detail>div>p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.deliverable-panel:where(:not(.reference-site,.reference-site *)){padding:23px}
+.deliverable-panel h3:where(:not(.reference-site,.reference-site *)){font-size:21px}
+.deliverable-panel>div:not(.eyebrow):where(:not(.reference-site,.reference-site *)){gap:14px;padding:20px 0}
+.example-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.example-grid p:where(:not(.reference-site,.reference-site *)){font-size:23px}
+.use-case-section:where(:not(.reference-site,.reference-site *)),.fit-section:where(:not(.reference-site,.reference-site *)){padding-block:60px}
+.mini-process:where(:not(.reference-site,.reference-site *)){gap:28px 22px}
+.mini-process h3:where(:not(.reference-site,.reference-site *)){font-size:23px}
+.mini-process p:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.fit-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:34px}
+.fit-grid h3:where(:not(.reference-site,.reference-site *)){font-size:28px}
+.fit-grid p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.about-story p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.about-principles:where(:not(.reference-site,.reference-site *)){padding-block:60px}
+.process-step:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:22px;padding:45px 0}
+.process-step aside:where(:not(.reference-site,.reference-site *)){grid-column:1}
+.process-big:where(:not(.reference-site,.reference-site *)){font-size:60px}
+.process-step h2:where(:not(.reference-site,.reference-site *)){font-size:35px}
+.process-step>div>p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.process-step>aside:where(:not(.reference-site,.reference-site *)){padding:24px}
+.page-cta h2:where(:not(.reference-site,.reference-site *)){font-size:39px}
+.page-cta>div>p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.article-hero h1:where(:not(.reference-site,.reference-site *)){font-size:43px}
+.article-layout:where(:not(.reference-site,.reference-site *)){padding-top:45px;padding-bottom:60px}
+.article-layout article h2:where(:not(.reference-site,.reference-site *)){font-size:29px}
+.article-layout article p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.article-end:where(:not(.reference-site,.reference-site *)){padding:24px}
+.resource-card:where(:not(.reference-site,.reference-site *)){padding:23px}
+.resource-card h2:where(:not(.reference-site,.reference-site *)){font-size:33px}
+.contact-layout h1:where(:not(.reference-site,.reference-site *)){font-size:46px}
+.contact-layout>div>p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.contact-guide:where(:not(.reference-site,.reference-site *)){padding:25px}
+.contact-guide h3:where(:not(.reference-site,.reference-site *)){font-size:23px}
+.admin-header .brand-image:where(:not(.reference-site,.reference-site *)){width:105px;height:89px}
+.admin-header .brand-image img:where(:not(.reference-site,.reference-site *)){width:105px}
+.footer-top:where(:not(.reference-site,.reference-site *)){gap:18px}
+.footer-top .brand-image:where(:not(.reference-site,.reference-site *)){width:145px;height:123px}
+.footer-top .brand-image img:where(:not(.reference-site,.reference-site *)){width:145px}}
+@media (prefers-reduced-motion:reduce){.hero .orange:where(:not(.reference-site,.reference-site *)){background:none;color:#a18400}}
+.brand-image img:where(:not(.reference-site,.reference-site *)),.footer-top .brand-image img:where(:not(.reference-site,.reference-site *)),.admin-header .brand-image img:where(:not(.reference-site,.reference-site *)){width:auto;max-width:100%;height:100%;object-fit:contain}
+.hero-copy:where(:not(.reference-site,.reference-site *)),.hero-aside:where(:not(.reference-site,.reference-site *)){min-width:0}
+@media (max-width:480px){.hero-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:minmax(0,1fr)}
+.hero h1:where(:not(.reference-site,.reference-site *)){font-size:clamp(45px,13.5vw,55px)}
+.hero .crossed:where(:not(.reference-site,.reference-site *)){font-size:.57em}
+.hero-copy>p:where(:not(.reference-site,.reference-site *)){overflow-wrap:break-word}}
+.scope-section:where(:not(.reference-site,.reference-site *)){background:#f0f1ec;border-block:1px solid #deded4}
+.scope-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-top:38px}
+.scope-grid article:where(:not(.reference-site,.reference-site *)){padding:30px;background:#fff;border:1px solid #deded5;border-radius:13px}
+.scope-grid .mono:where(:not(.reference-site,.reference-site *)){font-size:12px;color:#837326}
+.scope-grid h3:where(:not(.reference-site,.reference-site *)){font-size:29px;line-height:1.15;margin:22px 0}
+.scope-grid p:where(:not(.reference-site,.reference-site *)){display:flex;align-items:flex-start;gap:10px;font-size:16px;line-height:1.7;margin:14px 0}
+.scope-grid p svg:where(:not(.reference-site,.reference-site *)){flex-shrink:0;margin-top:5px;color:#9a8500}
+.scope-grid article>svg:where(:not(.reference-site,.reference-site *)){color:#a68e00}
+.scope-grid a:where(:not(.reference-site,.reference-site *)){font-size:14px;text-decoration:underline}
+.delivery-rhythm:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin:40px 0}
+.delivery-rhythm>div:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:26px 1fr;column-gap:14px;row-gap:10px}
+.delivery-rhythm svg:where(:not(.reference-site,.reference-site *)){color:#a08b18;grid-row:span 2}
+.delivery-rhythm b:where(:not(.reference-site,.reference-site *)){font-size:17px}
+.delivery-rhythm span:where(:not(.reference-site,.reference-site *)){font-size:15px;color:#74746b;line-height:1.7}
+.scope-section .scope-note:where(:not(.reference-site,.reference-site *)){margin-bottom:25px}
+.commercial-grid article:where(:not(.reference-site,.reference-site *)){background:#f6f6f0}
+.commercial-grid p:where(:not(.reference-site,.reference-site *)){display:block}
+.commercial-grid button:where(:not(.reference-site,.reference-site *)){margin-top:14px}
+.payment-panel:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1.5fr;gap:40px;border:1px solid #deded5;padding:35px;margin-top:32px;border-radius:13px}
+.payment-panel .mono:where(:not(.reference-site,.reference-site *)){font-size:11px;color:#8a7f40}
+.payment-panel h3:where(:not(.reference-site,.reference-site *)){font-size:32px;margin:18px 0}
+.payment-panel p:where(:not(.reference-site,.reference-site *)){font-size:15px}
+.payment-options:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:center}
+.payment-options>div:where(:not(.reference-site,.reference-site *)){display:flex;flex-direction:column;gap:13px}
+.payment-options span:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.payment-options b:where(:not(.reference-site,.reference-site *)){font-family:"Space Grotesk";font-size:27px;letter-spacing:-.06em}
+.payment-options small:where(:not(.reference-site,.reference-site *)){font-size:12px;color:#7b7b71;line-height:1.8}
+.work-grid:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:30px;margin-top:32px}
+.work-card:where(:not(.reference-site,.reference-site *)){border:1px solid #deded5;border-radius:14px;overflow:hidden;background:white;transition:transform .25s}
+.work-card:hover:where(:not(.reference-site,.reference-site *)){transform:translateY(-4px)}
+.work-art:where(:not(.reference-site,.reference-site *)){padding:32px;background:#1d1d1d;color:#fff;min-height:235px;display:flex;flex-direction:column;justify-content:space-between;gap:28px}
+.work-card:nth-child(3n/**/+2) .work-art:where(:not(.reference-site,.reference-site *)){background:#f7df61;color:#252515}
+.work-card:nth-child(3n) .work-art:where(:not(.reference-site,.reference-site *)){background:#e8eae0;color:#32382a}
+.work-art .mono:where(:not(.reference-site,.reference-site *)){font-size:11px;opacity:.7}
+.work-art h3:where(:not(.reference-site,.reference-site *)){font-size:38px;line-height:1.1;max-width:380px}
+.workflow-steps:where(:not(.reference-site,.reference-site *)){display:flex;gap:10px;flex-wrap:wrap}
+.workflow-steps span:where(:not(.reference-site,.reference-site *)){display:flex;align-items:center;gap:10px;font-size:12px}
+.work-card-body:where(:not(.reference-site,.reference-site *)){padding:30px}
+.work-card-body>.mono:where(:not(.reference-site,.reference-site *)){font-size:11px;color:#8b8150}
+.work-card-body h2:where(:not(.reference-site,.reference-site *)){font-size:31px;line-height:1.12;margin:17px 0}
+.work-card-body p:where(:not(.reference-site,.reference-site *)){font-size:16px;line-height:1.8}
+.tech-tags:where(:not(.reference-site,.reference-site *)){display:flex;gap:8px;flex-wrap:wrap;margin:23px 0}
+.tech-tags span:where(:not(.reference-site,.reference-site *)){font-size:12px;padding:5px 9px;background:#f0f0e9;border:1px solid #e1e1d6;border-radius:5px}
+.work-page .metric-strip:where(:not(.reference-site,.reference-site *)){margin-top:45px}
+.work-page .page-hero p.scope-note:where(:not(.reference-site,.reference-site *)){font-size:14px}
+.service-grid .service-card:nth-last-child(3):where(:not(.reference-site,.reference-site *)){border-color:#d5bd32;background:#fffbe3}
+@media (max-width:1000px){.scope-grid:where(:not(.reference-site,.reference-site *)){gap:15px}
+.scope-grid article:where(:not(.reference-site,.reference-site *)){padding:23px}
+.scope-grid h3:where(:not(.reference-site,.reference-site *)){font-size:25px}
+.payment-panel:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.work-art h3:where(:not(.reference-site,.reference-site *)){font-size:33px}}
+@media (max-width:700px){.scope-grid:where(:not(.reference-site,.reference-site *)),.work-grid:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr}
+.delivery-rhythm:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:25px}
+.scope-grid h3:where(:not(.reference-site,.reference-site *)){font-size:29px}
+.scope-grid article:where(:not(.reference-site,.reference-site *)){padding:27px}
+.payment-panel:where(:not(.reference-site,.reference-site *)){padding:26px}
+.payment-options:where(:not(.reference-site,.reference-site *)){grid-template-columns:1fr;gap:22px}
+.payment-options>div:where(:not(.reference-site,.reference-site *)){display:grid;grid-template-columns:1fr 1fr;padding-bottom:20px;border-bottom:1px solid #deded5}
+.payment-options small:where(:not(.reference-site,.reference-site *)){grid-column:1/-1}
+.payment-options b:where(:not(.reference-site,.reference-site *)){text-align:right}
+.work-art:where(:not(.reference-site,.reference-site *)){min-height:220px;padding:27px}
+.work-art h3:where(:not(.reference-site,.reference-site *)){font-size:35px}
+.work-card-body:where(:not(.reference-site,.reference-site *)){padding:26px}
+.work-page .metric-strip:where(:not(.reference-site,.reference-site *)){gap:15px}
+.work-page .metric-strip strong:where(:not(.reference-site,.reference-site *)){font-size:29px}
+.work-page .metric-strip .mono:where(:not(.reference-site,.reference-site *)){font-size:10px}
+.workflow-steps:where(:not(.reference-site,.reference-site *)){gap:7px}
+.workflow-steps span:where(:not(.reference-site,.reference-site *)){gap:6px}
+.commercial-section h2:where(:not(.reference-site,.reference-site *)){overflow-wrap:break-word}}
+.jinnx-contact-details { margin-top: 28px; min-width: 0; }
+.jinnx-contact-details h3 { margin: 20px 0 12px; }
+.jinnx-contact-details p { margin: 8px 0; font-size: 15px; line-height: 1.6; }
+.jinnx-contact-details a { color: inherit; overflow-wrap: anywhere; }
