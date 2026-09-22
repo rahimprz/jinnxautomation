@@ -1115,3 +1115,14 @@
 
 .reference-site .footer-addr a { overflow-wrap: anywhere; }
 .reference-site .footer-top > div { min-width: 0; }
+
+/* ---- layout pass: compact hero, wider container, full-bleed banner, sane logos ---- */
+.reference-site .container{max-width:1440px}
+.reference-site .hero{padding:44px 0 56px}
+.reference-site .hero-headline{font-size:clamp(38px,5vw,76px);line-height:.96;margin-top:18px}
+.reference-site .hero-sub{max-width:52ch}
+.reference-site .nav-logo img{height:44px;width:auto}
+.reference-site .footer-brand img,.reference-site .jinnx-reference-logo{height:auto;max-width:150px}
+.reference-site .footer-banner{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;padding-left:max(24px,calc(50vw - 720px));padding-right:max(24px,calc(50vw - 720px))}
+.reference-site .footer-banner-inner{max-width:1440px;margin:0 auto}
+.reference-site .h2{font-size:clamp(30px,3.6vw,54px)}

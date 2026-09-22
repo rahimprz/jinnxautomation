@@ -1017,3 +1017,34 @@ body:where(:not(.reference-site,.reference-site *)){background:var(--paper);colo
 .jinnx-contact-details h3 { margin: 20px 0 12px; }
 .jinnx-contact-details p { margin: 8px 0; font-size: 15px; line-height: 1.6; }
 .jinnx-contact-details a { color: inherit; overflow-wrap: anywhere; }
+
+/* ---- layout pass: inner pages share the home chrome; sizes brought in line ---- */
+.brand-image{width:108px;height:auto}
+.brand-image img{width:108px}
+.footer-top .brand-image{width:132px;height:auto}
+.footer-top .brand-image img{width:132px}
+.page-hero h1{font-size:clamp(38px,4.8vw,68px);letter-spacing:-.04em;line-height:1.02}
+.page-hero{padding-top:56px;padding-bottom:56px}
+.service-full{display:grid;gap:18px;padding:40px 0;border-top:1px solid var(--border)}
+.service-full:first-of-type{border-top:0}
+.service-full h2{font-size:clamp(28px,3vw,40px);letter-spacing:-.03em;margin:0}
+.service-full .service-headline{font-size:1.2rem;color:var(--muted-foreground);max-width:60ch;margin:0}
+.service-full .service-intro{max-width:70ch;margin:0}
+.service-full .service-grid-2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 36px}
+.service-full h4{margin:0 0 8px;font-size:.85rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted-foreground)}
+.service-full ul{margin:0;padding-left:1.1rem;display:grid;gap:6px}
+.service-full .service-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 36px;padding-top:8px}
+.service-full .service-meta p{margin:0}
+.service-full .service-boundary{border-left:3px solid var(--orange);padding:8px 14px;background:var(--accent);max-width:70ch}
+.services-index{display:flex;flex-wrap:wrap;gap:8px 12px;margin:0 0 8px}
+.services-index a{font-size:.9rem;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff}
+.services-index a:hover{border-color:var(--orange);color:var(--orange)}
+.contact-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:48px;align-items:start;padding:40px 0 64px}
+.contact-grid form{display:grid;gap:12px}
+.contact-grid form label{font-weight:600;font-size:.95rem}
+.contact-details{display:grid;gap:22px}
+.contact-details h3{margin:0 0 6px;font-size:1.05rem}
+.contact-details p{margin:0}
+.contact-details a{color:inherit}
+.inner-page{padding-top:8px}
+@media (max-width:900px){.service-full .service-grid-2,.service-full .service-meta,.contact-grid{grid-template-columns:1fr}}

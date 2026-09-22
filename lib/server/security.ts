@@ -19,7 +19,11 @@ export function allowedOrigins(){
 }
 export function guardMutation(req:Request){
  const origin=req.headers.get('origin');
- if(!origin||!allowedOrigins().has(origin)||req.headers.get('sec-fetch-site')==='cross-site')throw new HttpError(403,'This request is not allowed.');
+ // A browser only sends an Origin matching our own host for same-origin
+ // requests, so a custom domain works without being listed in ALLOWED_ORIGINS.
+ const host=req.headers.get('x-forwarded-host')||req.headers.get('host');
+ let sameOrigin=false;try{sameOrigin=!!origin&&!!host&&new URL(origin).host===host}catch{}
+ if(!origin||!(sameOrigin||allowedOrigins().has(origin))||req.headers.get('sec-fetch-site')==='cross-site')throw new HttpError(403,'This request is not allowed.');
  if(req.headers.get('x-jinnx-request')!=='1'||!req.headers.get('content-type')?.startsWith('application/json'))throw new HttpError(415,'Please use the website form.');
 }
 export async function readBody(req:Request){
