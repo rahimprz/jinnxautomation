@@ -136,7 +136,7 @@ assert.equal((await intake.POST(post({ ...data, idea: 'x'.repeat(13000) }))).sta
 assert.equal((await intake.POST(post(data))).status, 201, 'a valid inquiry is accepted');
 assert.equal((await intake.POST(post(data))).status, 201, 'resubmitting the same reference is idempotent');
 assert.equal(Number((await rows('SELECT COUNT(*) n FROM inquiries'))[0].n), 1, 'the duplicate did not create a second row');
-assert.equal(Number((await rows('SELECT estimate FROM inquiries'))[0].estimate), 12299, 'the estimate is computed on the server');
+assert.equal(Number((await rows('SELECT estimate FROM inquiries'))[0].estimate), 0, 'no price is computed or stored');
 assert.equal((await intake.POST(post({ ...data, idea: 'A different project description entirely, rewritten.' }))).status, 409,
   'reusing a reference with new content conflicts');
 

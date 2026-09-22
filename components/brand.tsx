@@ -1,1 +1,1 @@
-export default function Brand(){return <a className="brand brand-image" href="/" aria-label="Jinnx Automation home"><img src="/images/jinnx-automation-logo.webp" width="640" height="542" alt="Jinnx Automation" fetchPriority="high"/></a>}
+export default function Brand(){return <a className="brand brand-image" href="/" aria-label="Jinnx Automation home"><img src="/images/jinnx-automation-logo.png" width="543" height="460" alt="Jinnx Automation" fetchPriority="high"/></a>}

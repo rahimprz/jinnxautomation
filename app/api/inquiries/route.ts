@@ -1,13 +1,13 @@
 import { eq } from 'drizzle-orm';
 import { database } from '@/lib/server/db';
 import { inquiries } from '@/db/schema';
-import { inquirySchema,addonPrices } from '@/lib/inquiries';
+import { inquirySchema } from '@/lib/inquiries';
 import { json,fail,guardMutation,readBody,limitRequests,clientAddress,HttpError } from '@/lib/server/security';
 export async function POST(req:Request){try{
  guardMutation(req);const parsed=inquirySchema.safeParse(await readBody(req));if(!parsed.success)throw new HttpError(400,'Check your name, email, consent, and project description (20–6,000 characters).');
  const v=parsed.data;if(v.website)throw new HttpError(400,'Please leave the website field empty.');
  await limitRequests(clientAddress(req)||v.email);
- const estimate=10999+v.addons.reduce((sum,i)=>sum+addonPrices[i],0),now=Date.now(),addons=JSON.stringify(v.addons);
+ const estimate=0,now=Date.now(),addons=JSON.stringify(v.addons);
  const inserted=await database().insert(inquiries)
   .values({id:v.id,name:v.name,email:v.email,idea:v.idea,addons,estimate,status:'new',notes:'',createdAt:now,updatedAt:now,version:1,consentAt:now})
   .onConflictDoNothing({target:inquiries.id}).returning({id:inquiries.id});
