@@ -1035,7 +1035,7 @@ body:where(:not(.reference-site,.reference-site *)){background:var(--paper);colo
 .service-full ul{margin:0;padding-left:1.1rem;display:grid;gap:6px}
 .service-full .service-meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px 36px;padding-top:8px}
 .service-full .service-meta p{margin:0}
-.service-full .service-boundary{border-left:3px solid var(--orange);padding:8px 14px;background:var(--accent);max-width:70ch}
+.service-full .service-boundary{border:1px solid var(--border);padding:10px 14px;background:var(--accent);border-radius:8px;max-width:70ch;color:var(--muted-foreground)}
 .services-index{display:flex;flex-wrap:wrap;gap:8px 12px;margin:0 0 8px}
 .services-index a{font-size:.9rem;padding:6px 12px;border:1px solid var(--border);border-radius:999px;background:#fff}
 .services-index a:hover{border-color:var(--orange);color:var(--orange)}
