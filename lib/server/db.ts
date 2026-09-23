@@ -9,5 +9,5 @@ export const inquiryColumns={
  id:inquiries.id,name:inquiries.name,email:inquiries.email,idea:inquiries.idea,
  addons:inquiries.addons,estimate:inquiries.estimate,status:inquiries.status,
  notes:inquiries.notes,created_at:inquiries.createdAt,updated_at:inquiries.updatedAt,
- version:inquiries.version,
+ version:inquiries.version,phone:inquiries.phone,
 };

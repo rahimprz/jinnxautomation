@@ -16,9 +16,10 @@ process.env.AUTH_SECRET = 'a'.repeat(64);
 // Real Postgres semantics in-process: ILIKE, ON CONFLICT and RETURNING all
 // behave as they will on the deployed database.
 const client = new PGlite();
-const migration = fs.readFileSync('drizzle/0000_boring_mordo.sql', 'utf8');
-for (const statement of migration.split('--> statement-breakpoint')) {
-  if (statement.trim()) await client.exec(statement);
+for (const file of fs.readdirSync('drizzle').filter((f) => f.endsWith('.sql')).sort()) {
+  for (const statement of fs.readFileSync('drizzle/' + file, 'utf8').split('--> statement-breakpoint')) {
+    if (statement.trim()) await client.exec(statement);
+  }
 }
 
 // A cookie jar standing in for next/headers, so the real HMAC session code runs.
@@ -86,6 +87,7 @@ const data = {
   id: crypto.randomUUID(),
   name: 'Test Founder',
   email: 'test@example.com',
+  phone: '+1 555 000 1234',
   idea: 'Build a CRM automation workflow for our customer inquiries.',
   addons: [0, 3],
   consent: true,
@@ -137,6 +139,7 @@ assert.equal((await intake.POST(post(data))).status, 201, 'a valid inquiry is ac
 assert.equal((await intake.POST(post(data))).status, 201, 'resubmitting the same reference is idempotent');
 assert.equal(Number((await rows('SELECT COUNT(*) n FROM inquiries'))[0].n), 1, 'the duplicate did not create a second row');
 assert.equal(Number((await rows('SELECT estimate FROM inquiries'))[0].estimate), 0, 'no price is computed or stored');
+assert.equal((await rows('SELECT phone FROM inquiries'))[0].phone, '+1 555 000 1234', 'the phone number is stored');
 assert.equal((await intake.POST(post({ ...data, idea: 'A different project description entirely, rewritten.' }))).status, 409,
   'reusing a reference with new content conflicts');
 

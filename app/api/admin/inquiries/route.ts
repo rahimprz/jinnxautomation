@@ -15,7 +15,7 @@ export async function GET(req:Request){try{
  if(search){const pattern='%'+search+'%';filters.push(or(ilike(inquiries.name,pattern),ilike(inquiries.email,pattern),ilike(inquiries.idea,pattern)))}
  const where=filters.length?and(...filters):undefined,db=database();
  const rows=await db.select(inquiryColumns).from(inquiries).where(where).orderBy(desc(inquiries.createdAt)).limit(exportCsv?5000:30).offset(exportCsv?0:Math.floor(page)*30);
- if(exportCsv){const list=[['Name','Email','Project','Interests','Status','Notes','Received UTC'],...rows.map(r=>[r.name,r.email,r.idea,r.addons,r.status,r.notes,new Date(r.created_at).toISOString()])];return new Response('﻿'+list.map(r=>r.map(csvCell).join(',')).join('\r\n'),{headers:{'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="Jinnx-Automation-inquiries.csv"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}})}
+ if(exportCsv){const list=[['Name','Email','Phone','Project','Interests','Status','Notes','Received UTC'],...rows.map(r=>[r.name,r.email,r.phone||'',r.idea,r.addons,r.status,r.notes,new Date(r.created_at).toISOString()])];return new Response('﻿'+list.map(r=>r.map(csvCell).join(',')).join('\r\n'),{headers:{'Content-Type':'text/csv; charset=utf-8','Content-Disposition':'attachment; filename="Jinnx-Automation-inquiries.csv"','Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff'}})}
  const [total]=await db.select({count:count()}).from(inquiries).where(where);
  const stats=await db.select({status:inquiries.status,count:count()}).from(inquiries).groupBy(inquiries.status);
  return json({inquiries:rows,total:Number(total?.count||0),stats:stats.map(s=>({status:s.status,count:Number(s.count)})),page:Math.floor(page)});

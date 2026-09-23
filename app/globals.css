@@ -1130,3 +1130,16 @@ body:where(:not(.reference-site,.reference-site *)){background:var(--paper);colo
 .process-step.visible .process-big{animation:num-pop .7s cubic-bezier(.2,.7,.2,1) both}
 .inquiry-card input:focus,.inquiry-card textarea:focus{box-shadow:0 0 0 4px rgba(255,112,31,.18)}
 @media (prefers-reduced-motion:reduce){.svc-runs::before,.grid-paper,.process-step.visible .process-big{animation:none}}
+
+/* ---- inquiry block, light: sits between page content and the dark footer banner ---- */
+.inquiry-block{background:#fff;color:var(--ink);border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-top:48px;padding:84px 0}
+.inquiry-block h2{color:var(--ink)}
+.inquiry-block .lead{color:var(--muted-foreground)}
+.inquiry-points li{color:var(--ink)}
+.inquiry-card{border:1px solid var(--border);box-shadow:0 30px 60px -44px rgba(0,0,0,.35)}
+.inquiry-next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:28px}
+.inquiry-next > div{padding:16px;border-radius:12px;background:var(--paper);border:1px solid var(--border);display:grid;gap:4px;align-content:start}
+.inquiry-next b{font-size:1.5rem;color:var(--orange);letter-spacing:-.03em;line-height:1}
+.inquiry-next strong{font-size:1rem}
+.inquiry-next span{font-size:.92rem;color:var(--muted-foreground)}
+@media (max-width:600px){.inquiry-next{grid-template-columns:1fr}}
