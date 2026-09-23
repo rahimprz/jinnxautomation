@@ -3,6 +3,7 @@ import React,{createElement,useEffect,useRef,useState} from 'react';
 import templates from '@/lib/reference-templates.json';
 import {projects} from '@/components/work-examples';
 import {addonNames} from '@/lib/inquiries';
+import {services} from '@/lib/site-content';
 import {ArrowRight,Plus,Check,X,Menu} from 'lucide-react';
 import {Button} from '@/components/ui/button';
 import {Dialog,DialogContent,DialogTitle,DialogDescription} from '@/components/ui/dialog';
@@ -21,6 +22,21 @@ function CountUp({text}:{text:string}){
   io.observe(el);return()=>{io.disconnect();cancelAnimationFrame(raf)}},[text]);
  return <span ref={ref}>{shown}</span>;
 }
+// The pitch as a loop: a request arrives, the agent drafts, HOLD waits, the
+// owner approves, it sends. Pure CSS timing; static markup.
+function ApprovalDemo(){
+ return <div className="approval-demo" aria-hidden>
+  <div className="ad-head"><span className="ad-dot"/><span>Inbox · agent on duty</span><span className="ad-live">live</span></div>
+  <div className="ad-row"><span className="ad-avatar">MK</span><div><b>Quote request</b><small>Can you send pricing for 200 units by Friday?</small></div></div>
+  <div className="ad-draft"><span className="ad-tag">Draft ready · waiting for you</span><p className="ad-typing">Hi Maya, yes. The quote for 200 units is attached, with delivery in six working days. Happy to talk through options.</p></div>
+  <div className="ad-gate"><span className="ad-hold">HOLD</span><span className="ad-stamp">Approved by you</span></div>
+  <div className="ad-sent"><span className="ad-check"><Check size={11}/></span>Sent from your mailbox · logged in the CRM</div>
+ </div>;
+}
+function Ticker(){
+ const items=[...services,...services];
+ return <div className="ticker" aria-hidden><div className="ticker-track">{items.map((s,i)=><span key={s.slug+i}>{s.name}<i/></span>)}</div></div>;
+}
 function PlanningCountdown(){const [cells,setCells]=useState(['—','—','—','—']);useEffect(()=>{const tick=()=>{const now=new Date();const next=new Date(Date.UTC(now.getUTCFullYear(),now.getUTCMonth()+1,1));let s=Math.max(0,Math.floor((next.getTime()-now.getTime())/1000));setCells([Math.floor(s/86400),Math.floor(s%86400/3600),Math.floor(s%3600/60),s%60].map(x=>String(x).padStart(2,'0')))};tick();const timer=setInterval(tick,1000);return()=>clearInterval(timer)},[]);return <div className="countdown-grid" aria-label="Time until next calendar month">{cells.map((x,i)=><div className="countdown-cell" key={i}><div className="num">{x}</div><div className="lbl">{['Days','Hours','Minutes','Seconds'][i]}</div></div>)}</div>}
 // Every page shares the home page's nav and footer. Home and portfolio render
 // their full templates; plan and faq are assembled from home sections; any
@@ -38,6 +54,8 @@ export function ReferenceSite({route,selected,total,onToggle,onContact,children,
   if(/\b(stat-strip-num|adv-result-num|adv-hs-num)\b/.test(cls)||(/\bnum\b/.test(cls)&&/proof-stat|industries-stat|footer-stat/.test(parentCls))){let used=false;return createElement(n.tag,p,n.children.map((c,i)=>typeof c==='string'&&!used&&/\d/.test(c)?(used=true,<CountUp key={key+'.c'} text={c}/>):render(c,key+'.'+i,cls)))}
   if(component==='summary')return <React.Fragment key={key}>{summary()}</React.Fragment>;
   if(component==='countdown')return <PlanningCountdown key={key}/>;
+  if(component==='approval-demo')return <ApprovalDemo key={key}/>;
+  if(component==='ticker')return <div className="ticker-band" key={key}><Ticker/></div>;
   if(component==='mobile')return menu?<div className="nav-mobile open" key={key}><div className="container nav-mobile-inner">{[['Services','/services'],['Solution','/#solution'],['How It Works','/#journey'],['Portfolio','/work'],['Your Plan','/#pricing'],['FAQ','/#faq']].map(([label,url])=><a key={url} href={url} onClick={()=>setMenu(false)}>{label}<ArrowRight size={16}/></a>)}<a className="btn btn-orange nav-mobile-cta" href="/#pricing" onClick={()=>setMenu(false)}>Start your project <ArrowRight size={16}/></a></div></div>:null;
   if(cls==='faq-list')return <Accordion type="single" collapsible value={faq} onValueChange={setFaq} className="faq-list" key={key}>{n.children.map((c,i)=>render(c,key+'.'+i))}</Accordion>;
   if(component==='faq'){const i=Number(p['data-index']);const question=n.children.find(c=>typeof c!=='string'&&c.props.className==='faq-q');const answer=n.children.find(c=>typeof c!=='string'&&c.props.className==='faq-a');return <AccordionItem value={'faq-'+i} className={'faq-item '+(faq==='faq-'+i?'open':'')} key={key}><AccordionTrigger className="faq-q"><span>{question?plain(question):''}</span><span className="faq-toggle"><Plus size={14}/></span></AccordionTrigger><AccordionContent className="faq-a">{answer?plain(answer):''}</AccordionContent></AccordionItem>}

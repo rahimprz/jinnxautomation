@@ -1126,3 +1126,49 @@
 .reference-site .footer-banner{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;padding-left:max(24px,calc(50vw - 720px));padding-right:max(24px,calc(50vw - 720px))}
 .reference-site .footer-banner-inner{max-width:1440px;margin:0 auto}
 .reference-site .h2{font-size:clamp(30px,3.6vw,54px)}
+
+/* ---- motion pass: hero entrance, inbox demo, ticker, hover nudges ---- */
+@keyframes rs-rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.reference-site .hero .eyebrow{animation:rs-rise .8s cubic-bezier(.2,.7,.2,1) both}
+.reference-site .hero-headline{animation:rs-rise .9s cubic-bezier(.2,.7,.2,1) .08s both}
+.reference-site .hero-sub{animation:rs-rise .9s cubic-bezier(.2,.7,.2,1) .2s both}
+.reference-site .hero-cta-row{animation:rs-rise .9s cubic-bezier(.2,.7,.2,1) .32s both}
+.reference-site .proof{animation:rs-rise 1s cubic-bezier(.2,.7,.2,1) .45s both}
+.reference-site .btn svg{transition:transform .2s ease}
+.reference-site .btn:hover svg{transform:translateX(3px)}
+.reference-site .industry-card,.reference-site .journey-card,.reference-site .problem-card,.reference-site .testi{transition:transform .25s ease,box-shadow .25s ease}
+.reference-site .industry-card:hover,.reference-site .journey-card:hover,.reference-site .problem-card:hover,.reference-site .testi:hover{transform:translateY(-4px);box-shadow:0 18px 40px -28px rgba(0,0,0,.35)}
+
+/* inbox demo: a request arrives, a draft types itself, HOLD waits, you approve, it sends */
+.reference-site .approval-demo{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;margin-bottom:16px;display:grid;gap:10px;font-size:13px;line-height:1.35;overflow:hidden;position:relative}
+.reference-site .ad-head{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
+.reference-site .ad-head .ad-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);animation:ad-ping 2s infinite}
+.reference-site .ad-head .ad-live{margin-left:auto;color:var(--orange);font-weight:600}
+@keyframes ad-ping{0%{box-shadow:0 0 0 0 rgba(255,112,31,.5)}70%{box-shadow:0 0 0 8px rgba(255,112,31,0)}100%{box-shadow:0 0 0 0 rgba(255,112,31,0)}}
+.reference-site .ad-row{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;padding:10px;border-radius:10px;background:var(--cream);animation:ad-arrive 8s cubic-bezier(.2,.7,.2,1) infinite}
+.reference-site .ad-avatar{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:11px;font-weight:700}
+.reference-site .ad-row b{display:block;font-size:13px}
+.reference-site .ad-row small{display:block;color:var(--ink-2);font-size:12px}
+@keyframes ad-arrive{0%{opacity:0;transform:translateX(-14px)}8%{opacity:1;transform:none}92%{opacity:1}100%{opacity:0}}
+.reference-site .ad-draft{padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:#fff;animation:ad-show 8s ease infinite;opacity:0}
+.reference-site .ad-tag{display:inline-block;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--orange);font-weight:700;margin-bottom:4px}
+.reference-site .ad-typing{margin:0;color:var(--ink);clip-path:inset(0 100% 0 0);animation:ad-type 8s linear infinite}
+@keyframes ad-show{0%,12%{opacity:0;transform:translateY(6px)}18%,90%{opacity:1;transform:none}100%{opacity:0}}
+@keyframes ad-type{0%,16%{clip-path:inset(0 100% 0 0)}44%,100%{clip-path:inset(0 0 0 0)}}
+.reference-site .ad-gate{display:flex;align-items:center;gap:10px;min-height:30px}
+.reference-site .ad-hold{font-size:10px;letter-spacing:.12em;font-weight:800;padding:5px 8px;border-radius:6px;background:repeating-linear-gradient(135deg,var(--orange) 0 6px,#161616 6px 12px);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.6);animation:ad-hold 8s ease infinite;opacity:0}
+@keyframes ad-hold{0%,42%{opacity:0;transform:scale(.9)}48%,64%{opacity:1;transform:scale(1)}66%,100%{opacity:.35;transform:scale(.96)}}
+.reference-site .ad-stamp{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--orange);border:2px solid var(--orange);border-radius:6px;padding:3px 8px;opacity:0;animation:ad-stamp 8s cubic-bezier(.2,.9,.2,1.2) infinite}
+@keyframes ad-stamp{0%,62%{opacity:0;transform:rotate(-8deg) scale(1.6)}66%,92%{opacity:1;transform:rotate(-6deg) scale(1)}100%{opacity:0}}
+.reference-site .ad-sent{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-size:12px;opacity:0;animation:ad-sent 8s ease infinite}
+.reference-site .ad-sent .ad-check{width:18px;height:18px;border-radius:50%;background:var(--ink);color:var(--orange);display:grid;place-items:center}
+@keyframes ad-sent{0%,72%{opacity:0;transform:translateY(6px)}78%,94%{opacity:1;transform:none}100%{opacity:0}}
+
+/* ticker of everything we build */
+.reference-site .ticker-band{margin-top:22px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.reference-site .ticker-track{display:flex;width:max-content;animation:rs-ticker 60s linear infinite;padding:12px 0}
+.reference-site .ticker-band:hover .ticker-track{animation-play-state:paused}
+.reference-site .ticker-track span{display:inline-flex;align-items:center;gap:18px;padding:0 18px;font-size:14px;font-weight:600;letter-spacing:.02em;color:var(--ink-2);white-space:nowrap}
+.reference-site .ticker-track span i{width:6px;height:6px;border-radius:50%;background:var(--orange);display:inline-block}
+@keyframes rs-ticker{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.reference-site .hero .eyebrow,.reference-site .hero-headline,.reference-site .hero-sub,.reference-site .hero-cta-row,.reference-site .proof,.reference-site .ad-row,.reference-site .ad-draft,.reference-site .ad-typing,.reference-site .ad-hold,.reference-site .ad-stamp,.reference-site .ad-sent,.reference-site .ticker-track,.reference-site .ad-dot{animation:none;opacity:1;clip-path:none;transform:none}}

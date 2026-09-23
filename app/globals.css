@@ -1112,3 +1112,21 @@ body:where(:not(.reference-site,.reference-site *)){background:var(--paper);colo
 .inquiry-card form{display:grid;gap:12px}
 .inquiry-card form label{font-weight:600;font-size:.95rem}
 @media (max-width:900px){.inquiry-block-inner{grid-template-columns:1fr;gap:28px}.inquiry-block{padding:52px 0}}
+
+/* ---- motion pass: signal on the how-it-runs strip, hovers, drifting grid, number pop ---- */
+.svc-runs{position:relative;padding-top:18px}
+.svc-runs::before{content:"";position:absolute;top:2px;left:0;width:12px;height:12px;border-radius:50%;background:var(--orange);box-shadow:0 0 0 4px rgba(255,112,31,.18);animation:svc-signal 7s cubic-bezier(.4,0,.2,1) infinite}
+@keyframes svc-signal{0%{left:0}22%{left:calc(25% + 4px)}40%{left:calc(50% + 8px)}62%{left:calc(50% + 8px)}80%{left:calc(75% + 12px)}100%{left:calc(100% - 12px)}}
+.svc-list li,.svc-cases article,.svc-meta > div,.resource-card,.fit-grid article{transition:transform .22s ease,box-shadow .22s ease}
+.svc-list li:hover,.svc-meta > div:hover,.resource-card:hover,.fit-grid article:hover{transform:translateY(-3px);box-shadow:0 16px 34px -26px rgba(0,0,0,.35)}
+.svc-cases article:hover{transform:translateY(-3px);box-shadow:0 20px 40px -26px rgba(0,0,0,.6)}
+.svc-icon{transition:transform .3s cubic-bezier(.2,.7,.2,1),background .2s}
+.service-full:hover .svc-icon{transform:rotate(-6deg) scale(1.06);background:#fff}
+.button svg,.text-link svg{transition:transform .2s ease}
+.button:hover svg,.text-link:hover svg{transform:translateX(3px)}
+@keyframes grid-drift{to{background-position:48px 48px}}
+.grid-paper{animation:grid-drift 40s linear infinite}
+@keyframes num-pop{0%{transform:scale(.6);opacity:0}60%{transform:scale(1.08)}100%{transform:scale(1);opacity:1}}
+.process-step.visible .process-big{animation:num-pop .7s cubic-bezier(.2,.7,.2,1) both}
+.inquiry-card input:focus,.inquiry-card textarea:focus{box-shadow:0 0 0 4px rgba(255,112,31,.18)}
+@media (prefers-reduced-motion:reduce){.svc-runs::before,.grid-paper,.process-step.visible .process-big{animation:none}}
