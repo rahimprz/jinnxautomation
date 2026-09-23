@@ -1121,7 +1121,8 @@
 .reference-site .hero{padding:44px 0 56px}
 .reference-site .hero-headline{font-size:clamp(38px,5vw,76px);line-height:.96;margin-top:18px}
 .reference-site .hero-sub{max-width:52ch}
-.reference-site .nav-logo img{height:56px;width:auto}
+.reference-site .nav-inner{height:88px}
+.reference-site .nav-logo img,.reference-site .nav-logo img.jinnx-reference-logo{height:72px;width:auto;max-width:none}
 .reference-site .footer-brand img{width:84px;max-width:84px;height:auto;display:block}
 .reference-site .footer-addr li,.reference-site .footer-addr li a{color:var(--ink)}
 .reference-site .hero-row{align-items:center}
