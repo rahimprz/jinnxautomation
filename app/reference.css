@@ -1124,8 +1124,8 @@
 .reference-site .nav-logo img{height:44px;width:auto}
 .reference-site .footer-brand img{width:84px;max-width:84px;height:auto;display:block}
 .reference-site .footer-addr li,.reference-site .footer-addr li a{color:var(--ink)}
-.reference-site .hero-row{align-items:flex-start}
-.reference-site .proof{margin-top:0;align-self:start}
+.reference-site .hero-row{align-items:center}
+.reference-site .proof{margin-top:0;align-self:center}
 .reference-site .footer-banner{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);border-radius:0;padding-left:max(24px,calc(50vw - 720px));padding-right:max(24px,calc(50vw - 720px))}
 .reference-site .footer-banner-inner{max-width:1440px;margin:0 auto}
 .reference-site .h2{font-size:clamp(30px,3.6vw,54px)}
