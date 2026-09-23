@@ -1158,8 +1158,8 @@
 .reference-site .ad-gate{display:flex;align-items:center;gap:10px;min-height:30px}
 .reference-site .ad-hold{font-size:10px;letter-spacing:.12em;font-weight:800;padding:5px 8px;border-radius:6px;background:repeating-linear-gradient(135deg,var(--orange) 0 6px,#161616 6px 12px);color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.6);animation:ad-hold 8s ease infinite;opacity:0}
 @keyframes ad-hold{0%,42%{opacity:0;transform:scale(.9)}48%,64%{opacity:1;transform:scale(1)}66%,100%{opacity:.35;transform:scale(.96)}}
-.reference-site .ad-stamp{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--orange);border:2px solid var(--orange);border-radius:6px;padding:3px 8px;opacity:0;animation:ad-stamp 8s cubic-bezier(.2,.9,.2,1.2) infinite}
-@keyframes ad-stamp{0%,62%{opacity:0;transform:rotate(-8deg) scale(1.6)}66%,92%{opacity:1;transform:rotate(-6deg) scale(1)}100%{opacity:0}}
+.reference-site .ad-stamp{font-size:12px;font-weight:800;letter-spacing:.04em;color:var(--orange);border:2px solid var(--orange);border-radius:6px;padding:3px 8px;opacity:0;animation:ad-stamp 8s cubic-bezier(.2,.8,.2,1) infinite}
+@keyframes ad-stamp{0%,62%{opacity:0;transform:rotate(-8deg) scale(1.6)}65%{opacity:1;transform:rotate(-6deg) scale(.94)}68%,92%{opacity:1;transform:rotate(-6deg) scale(1)}100%{opacity:0}}
 .reference-site .ad-sent{display:flex;align-items:center;gap:8px;color:var(--ink-2);font-size:12px;opacity:0;animation:ad-sent 8s ease infinite}
 .reference-site .ad-sent .ad-check{width:18px;height:18px;border-radius:50%;background:var(--ink);color:var(--orange);display:grid;place-items:center}
 @keyframes ad-sent{0%,72%{opacity:0;transform:translateY(6px)}78%,94%{opacity:1;transform:none}100%{opacity:0}}
