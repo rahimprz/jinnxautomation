@@ -289,7 +289,10 @@ footer:where(:not(.reference-site,.reference-site *)){background:#eeeFe5;border-
 .legal-page:where(:not(.reference-site,.reference-site *)){max-width:850px}
 .legal-page h1:where(:not(.reference-site,.reference-site *)){margin-bottom:40px;font-size:65px}
 .legal-page h3:where(:not(.reference-site,.reference-site *)){margin-top:32px;margin-bottom:15px}
-.legal-page p:where(:not(.reference-site,.reference-site *)){font-size:16px}
+.legal-page p:where(:not(.reference-site,.reference-site *)){font-size:16px;margin-bottom:12px}
+.legal-page ul:where(:not(.reference-site,.reference-site *)){list-style:disc;padding-left:22px;margin:0 0 16px;font-size:16px;line-height:1.7;color:#657073}
+.legal-page li:where(:not(.reference-site,.reference-site *)){margin-bottom:8px}
+.legal-page a:where(:not(.reference-site,.reference-site *)){text-decoration:underline}
 .reveal:where(:not(.reference-site,.reference-site *)){animation:enter .6s ease-out both}
 .reveal.visible:where(:not(.reference-site,.reference-site *)){animation:enter .7s ease-out both}
 @keyframes  enter{from{opacity:.4;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
