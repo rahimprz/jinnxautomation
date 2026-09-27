@@ -10,6 +10,7 @@ import {Dialog,DialogContent,DialogTitle,DialogDescription} from '@/components/u
 import {GridCircuit} from '@/components/motion/grid-circuit';
 import {AgentRun} from '@/components/motion/agent-run';
 import {ToolsWall,CheckTeaser} from '@/components/growth-pages';
+import {Testimonials} from '@/components/team';
 import {Accordion,AccordionItem,AccordionTrigger,AccordionContent} from '@/components/ui/accordion';
 type Tree=string|{tag:string;props:Record<string,any>;children:Tree[]};
 const plain=(node:Tree):string=>typeof node==='string'?node:node.children.map(plain).join('');
@@ -74,7 +75,7 @@ export function ReferenceSite({route,selected,total,onToggle,onContact,children,
   return createElement(n.tag,p,n.children.length?n.children.map((c,i)=>render(c,key+'.'+i,cls)):undefined);
  }
  // New home sections slot in after the template section with the same index.
- const homeExtras:Record<number,React.ReactNode>={4:<AgentRun/>,7:<ToolsWall/>,9:<CheckTeaser/>};
+ const homeExtras:Record<number,React.ReactNode>={4:<AgentRun/>,7:<ToolsWall/>,9:<CheckTeaser/>,10:<Testimonials/>};
  const footIdx=trees.map(x=>typeof x!=='string').lastIndexOf(true);
  const item=detail!==null?projects[detail]:null;
  return <>{children?<><div ref={root} className="reference-site">{render(nav,'nav')}</div>{children}<div className="reference-site">{render(footer,'footer')}</div></>:<><div ref={root} className="reference-site">{trees.map((n,i)=>i===footIdx?null:<React.Fragment key={i}>{render(n,String(i))}{page==='home'?homeExtras[i]:null}</React.Fragment>)}</div>{extra}<div className="reference-site">{render(trees[footIdx],'footer')}</div></>}<Dialog open={!!item} onOpenChange={v=>!v&&setDetail(null)}><DialogContent className="brief-modal reference-case-dialog"><div className="eyebrow"><span/>JINNX AUTOMATION / SOLUTION DETAILS</div><DialogTitle className="modal-title">{item?.name}</DialogTitle><DialogDescription>{item?.summary}</DialogDescription><h4>What a first release could include</h4><ul className="concept-features">{item?.features.map(f=><li key={f}><Check size={17}/>{f}</li>)}</ul><div className="tech-tags">{item?.stack.map(t=><span key={t}>{t}</span>)}</div><p>{item?.boundary}</p><p>This is a solution concept. Your proposal defines the exact scope, delivery, and support arrangements.</p><Button className="button orange-btn" onClick={()=>{setDetail(null);onContact()}}>Build a solution like this <ArrowRight size={17}/></Button></DialogContent></Dialog></>;

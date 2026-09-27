@@ -241,9 +241,84 @@
 .jx-sec-faq dd { margin: 0; font-size: 16px; line-height: 1.7; color: var(--jx-mute); }
 @media (max-width: 900px) { .jx-sec-grid { grid-template-columns: 1fr; } .jx-sec-faq dl > div { grid-template-columns: 1fr; gap: 10px; } }
 
+
+/* ---- Team: the founder and the AI employees -------------------------- */
+.jx-team { padding: 110px 0; background: var(--jx-paper); border-bottom: 1px solid var(--jx-line); }
+.jx-team h2 { margin: 0; font-family: "Space Grotesk", Inter, sans-serif; font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -.055em; color: var(--jx-ink); text-wrap: balance; }
+.jx-team h2 span { color: #8f9696; }
+.jx-org { display: grid; justify-items: center; }
+.jx-owner { width: min(760px, 100%); padding: 32px; border-radius: 20px; background: var(--jx-ink); color: #fff; box-shadow: 0 30px 60px -40px rgb(22 22 22 / .7); }
+.jx-owner-id { display: flex; align-items: center; gap: 18px; }
+.jx-owner-id img, .jx-owner-mark { width: 72px; height: 72px; border-radius: 16px; object-fit: cover; flex: none; }
+.jx-owner-mark { display: grid; place-items: center; background: var(--jx-yellow); color: var(--jx-ink); font: 700 38px/1 "Space Grotesk", Inter, sans-serif; letter-spacing: -.06em; }
+.jx-owner h3 { margin: 6px 0 2px; font: 600 30px/1.05 "Space Grotesk", Inter, sans-serif; letter-spacing: -.045em; color: #fff; }
+.jx-owner-title { margin: 0; font-size: 15px; color: var(--jx-yellow); }
+.jx-badge-human { display: inline-block; padding: 4px 9px; border-radius: 999px; background: #fff; color: var(--jx-ink); font: 700 11px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; }
+.jx-owner-bio { margin: 22px 0 18px; font-size: 16px; line-height: 1.7; color: #d6d6d0; max-width: 62ch; }
+.jx-owner ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.jx-owner li { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 999px; border: 1px solid #ffffff33; font-size: 14px; color: #fff; }
+.jx-owner li svg { color: var(--jx-yellow); }
+
+.jx-gate-rail { position: relative; width: 100%; height: 88px; display: grid; place-items: center; }
+.jx-gate-rail::before { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 2px; background: var(--jx-ink); transform: translateX(-1px); }
+.jx-gate-rail span { position: relative; padding: 8px 14px; border: 1.5px solid var(--jx-ink); border-radius: 8px; font: 700 12px/1 Inter, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--jx-ink);
+  background: repeating-linear-gradient(-45deg, var(--jx-yellow) 0 8px, #fff3a6 8px 16px); }
+
+.jx-agents { list-style: none; margin: 0; padding: 22px 0 0; width: 100%; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; position: relative; border-top: 2px solid var(--jx-ink); }
+.jx-agent { position: relative; display: flex; flex-direction: column; gap: 12px; padding: 22px; border-radius: 16px; background: #fff; border: 1px solid var(--jx-line); transition: transform .35s var(--jx-ease), box-shadow .35s var(--jx-ease), border-color .35s; }
+.jx-agent::before { content: ""; position: absolute; left: 50%; top: -24px; width: 2px; height: 23px; background: var(--jx-ink); }
+.jx-agent:nth-child(n+5)::before { display: none; }
+.jx-agent:hover { transform: translateY(-4px); border-color: var(--jx-ink); box-shadow: 0 22px 40px -28px rgb(22 22 22 / .5); }
+.jx-agent-top { display: grid; grid-template-columns: 56px 1fr; gap: 12px; align-items: center; }
+.jx-agent h3 { margin: 0; font: 600 22px/1.1 "Space Grotesk", Inter, sans-serif; letter-spacing: -.04em; color: var(--jx-ink); }
+.jx-agent-role { margin: 3px 0 0; font-size: 14px; color: var(--jx-mute); }
+.jx-agent-status { grid-column: 1 / -1; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; color: var(--jx-yellow-deep); }
+.jx-agent-status i { width: 8px; height: 8px; border-radius: 50%; background: var(--jx-yellow); box-shadow: 0 0 0 0 rgb(245 206 0 / .7); animation: jx-duty 2.4s ease-out infinite; }
+@keyframes jx-duty { 0% { box-shadow: 0 0 0 0 rgb(245 206 0 / .7); } 80%, 100% { box-shadow: 0 0 0 8px rgb(245 206 0 / 0); } }
+.jx-agent-does { margin: 0; font-size: 15px; line-height: 1.6; color: #3f3f3b; flex: 1; }
+.jx-agent-never { margin: 0; display: grid; grid-template-columns: 18px 1fr; gap: 6px; padding: 10px 12px; border-radius: 10px; background: #f5f5f1; font-size: 13.5px; line-height: 1.5; color: var(--jx-ink); }
+.jx-agent-never svg { margin-top: 2px; color: #b3261e; }
+.jx-agent-link { display: inline-flex; align-items: center; gap: 5px; font-size: 14px; font-weight: 600; color: var(--jx-ink); text-decoration: none; border-bottom: 1px solid var(--jx-line); align-self: flex-start; }
+.jx-agent-link:hover { border-color: var(--jx-ink); }
+.jx-agent-you { background: var(--jx-yellow); border-color: var(--jx-yellow);
+  background-image: linear-gradient(#16161612 1px, transparent 1px), linear-gradient(90deg, #16161612 1px, transparent 1px); background-size: 28px 28px; }
+.jx-agent-you p { margin: 0; font-size: 15px; line-height: 1.6; color: #3a3000; flex: 1; }
+.jx-agent-you .jx-agent-link { border-color: #16161640; }
+.jx-agent:focus-within { outline: 3px solid var(--jx-ink); outline-offset: 3px; }
+.jx-agent-link:focus-visible { outline: none; }
+@media (max-width: 1100px) { .jx-agents { grid-template-columns: repeat(2, minmax(0, 1fr)); } .jx-agent:nth-child(n+3)::before { display: none; } }
+@media (max-width: 640px) {
+  .jx-team { padding: 80px 0; }
+  .jx-owner { padding: 24px 20px; }
+  .jx-agents { grid-template-columns: 1fr; border-top: 0; padding-top: 0; }
+  .jx-agent::before { display: none; }
+  .jx-gate-rail { height: 72px; }
+  .jx-gate-rail span { max-width: calc(100% - 24px); font-size: 10.5px; line-height: 1.35; text-align: center; }
+}
+
+/* ---- Testimonials ---------------------------------------------------- */
+.jx-quotes { padding: 110px 0; background: #fff; border-top: 1px solid var(--jx-line); }
+.jx-quotes h2 { margin: 0; font-family: "Space Grotesk", Inter, sans-serif; font-weight: 600; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.02; letter-spacing: -.055em; color: var(--jx-ink); }
+.jx-quote-grid { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 16px; }
+.jx-quote { position: relative; margin: 0; display: flex; flex-direction: column; gap: 18px; padding: 30px 28px; border-radius: 18px; background: var(--jx-paper); border: 1px solid var(--jx-line); }
+.jx-quote:first-child { background: var(--jx-ink); border-color: var(--jx-ink); }
+.jx-quote:first-child blockquote, .jx-quote:first-child figcaption b { color: #fff; }
+.jx-quote:first-child figcaption span { color: #c9c9c3; }
+.jx-quote > svg { color: var(--jx-yellow); }
+.jx-quote blockquote { margin: 0; flex: 1; font: 500 20px/1.45 "Space Grotesk", Inter, sans-serif; letter-spacing: -.02em; color: var(--jx-ink); }
+.jx-quote:first-child blockquote { font-size: 24px; }
+.jx-quote figcaption { display: grid; gap: 2px; font-size: 14px; }
+.jx-quote figcaption b { color: var(--jx-ink); }
+.jx-quote figcaption span { color: var(--jx-mute); }
+.jx-quote figcaption em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--jx-yellow-deep); margin-top: 4px; }
+.jx-quote-example { position: absolute; top: 14px; right: 14px; padding: 4px 9px; border-radius: 999px; border: 1.5px dashed currentColor; font: 700 11px/1 Inter, sans-serif; letter-spacing: .08em; text-transform: uppercase; color: #b3261e; background: #fff; }
+@media (max-width: 900px) { .jx-quotes { padding: 80px 0; } .jx-quote-grid { grid-template-columns: 1fr; } }
+
 /* ---- Reduced motion -------------------------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   .jx-circuit { animation: none; }
-  .jx-ind-card, .jx-ind-agent, .jx-tools-group li, .jx-btn, .jx-check-bar span { transition: none; }
+  .jx-ind-card, .jx-ind-agent, .jx-tools-group li, .jx-btn, .jx-check-bar span, .jx-agent { transition: none; }
+  .jx-agent-status i { animation: none; }
+  .jx-agent:hover { transform: none; }
   .jx-ind-card:hover, .jx-ind-agent:hover, .jx-tools-group li:hover, .jx-btn:hover { transform: none; }
 }
