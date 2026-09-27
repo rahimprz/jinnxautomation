@@ -26,6 +26,9 @@ pnpm dev                     # http://localhost:3000
 | `ADMIN_PASSWORD` | yes | Password for `/admin`. Minimum 12 characters. |
 | `AUTH_SECRET` | yes | Signs the admin session cookie. Minimum 32 characters; generate with `openssl rand -hex 32`. |
 | `ALLOWED_ORIGINS` | no | Comma-separated extra origins allowed to submit the contact form. |
+| `TWENTY_API_URL` | no | Twenty CRM API origin: `https://api.twenty.com` for Twenty Cloud, or your self-hosted URL. |
+| `TWENTY_API_KEY` | no | Twenty API key (Settings → APIs & Webhooks). With both set, each new inquiry is pushed to Twenty. |
+| `TWENTY_OPPORTUNITY_STAGE` | no | Stage for new opportunities. Defaults to `NEW`. |
 
 The contact form and the admin inbox reject any POST whose `Origin` is not
 allowed. Vercel's production and per-deployment URLs are trusted automatically
@@ -49,6 +52,15 @@ matches, the request is rejected rather than accepted.
 4. Deploy. Pushes to the default branch deploy automatically.
 
 After attaching a custom domain, set `ALLOWED_ORIGINS` to it and redeploy.
+
+## Twenty CRM
+
+When `TWENTY_API_URL` and `TWENTY_API_KEY` are set, every new inquiry is also
+sent to Twenty after the visitor gets their confirmation: the person is found by
+email or created, an opportunity is opened at the `NEW` stage with them as point
+of contact, and a note with the inquiry text, phone and interests is attached to
+both. The inquiry is always saved in Postgres first, so a Twenty outage never
+loses a lead; failures are logged in Vercel's function logs as `[twenty]`.
 
 ## Admin inbox
 

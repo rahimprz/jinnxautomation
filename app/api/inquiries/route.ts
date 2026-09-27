@@ -1,7 +1,9 @@
 import { eq, sql } from 'drizzle-orm';
+import { after } from 'next/server';
 import { database } from '@/lib/server/db';
 import { inquiries } from '@/db/schema';
 import { inquirySchema } from '@/lib/inquiries';
+import { syncInquiry } from '@/lib/server/twenty';
 import { json,fail,guardMutation,readBody,limitRequests,clientAddress,HttpError } from '@/lib/server/security';
 // The phone column was added after launch; make sure it exists before the first write.
 let ensured:Promise<void>|undefined;
@@ -21,5 +23,7 @@ export async function POST(req:Request){try{
   const [existing]=await database().select({email:inquiries.email,name:inquiries.name,idea:inquiries.idea,addons:inquiries.addons}).from(inquiries).where(eq(inquiries.id,v.id)).limit(1);
   if(!existing||existing.email!==v.email||existing.name!==v.name||existing.idea!==v.idea||existing.addons!==addons)throw new HttpError(409,'This request has changed. Please reopen the form and try again.');
  }
+ // New inquiries also go to Twenty CRM once the response is sent; retries of the same reference do not.
+ if(inserted.length)after(()=>syncInquiry({id:v.id,name:v.name,email:v.email,phone:v.phone,idea:v.idea,addons:v.addons}));
  return json({success:true,reference:v.id},201);
  }catch(e){return fail(e)}}

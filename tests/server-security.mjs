@@ -34,12 +34,28 @@ const sandbox = {
   console, process, Response, Request, URL, URLSearchParams, TextEncoder, TextDecoder,
   crypto, Date, JSON, Math, Number, String, Boolean, Array, Object, Set, Map, WeakMap,
   Error, TypeError, RangeError, Promise, RegExp, Symbol, BigInt, Uint8Array, ArrayBuffer,
-  isNaN, parseInt, parseFloat, structuredClone, AbortController,
+  isNaN, parseInt, parseFloat, structuredClone, AbortController, AbortSignal,
+  fetch: (...args) => fakeFetch(...args),
 };
 sandbox.globalThis = sandbox;
 const context = vm.createContext(sandbox);
 
 let db;
+// Background work handed to next/server's after(), run on demand by the tests.
+const deferred = [];
+// Stands in for the Twenty CRM REST API; records every request it receives.
+const twentyCalls = [];
+let twentyPeople = [];
+async function fakeFetch(url, init = {}) {
+  const u = new URL(url);
+  const body = init.body ? JSON.parse(init.body) : undefined;
+  twentyCalls.push({ method: init.method, path: u.pathname, search: decodeURIComponent(u.search), body, auth: init.headers?.Authorization });
+  const reply = (payload) => new Response(JSON.stringify({ data: payload }), { status: 200 });
+  if (init.method === 'GET' && u.pathname === '/rest/people') return reply({ people: twentyPeople });
+  if (u.pathname === '/rest/people' && body.phones) return new Response('Invalid phone number', { status: 400 });
+  const op = { '/rest/people': 'createPerson', '/rest/opportunities': 'createOpportunity', '/rest/notes': 'createNote', '/rest/noteTargets': 'createNoteTarget' }[u.pathname];
+  return reply({ [op]: { id: op + '-id', ...body } });
+}
 const loaded = {};
 function load(path) {
   if (loaded[path]) return loaded[path];
@@ -55,6 +71,8 @@ function load(path) {
     if (name === '@/lib/inquiries') return load('lib/inquiries.ts');
     if (name === '@/lib/server/security') return load('lib/server/security.ts');
     if (name === 'next/headers') return { cookies: async () => cookieStore };
+    if (name === 'next/server') return { after: (task) => deferred.push(task) };
+    if (name === '@/lib/server/twenty') return load('lib/server/twenty.ts');
     return nodeRequire(name);
   };
   // One shared context keeps classes and globals identical across modules, so
@@ -143,6 +161,29 @@ assert.equal((await rows('SELECT phone FROM inquiries'))[0].phone, '+1 555 000 1
 assert.equal((await intake.POST(post({ ...data, idea: 'A different project description entirely, rewritten.' }))).status, 409,
   'reusing a reference with new content conflicts');
 
+// --- Twenty CRM sync --------------------------------------------------------
+assert.equal(deferred.length, 1, 'only the first, newly stored submission is queued for the CRM');
+assert.deepEqual(JSON.parse(JSON.stringify(await deferred.pop()())), { skipped: true }, 'without Twenty credentials the sync is skipped');
+assert.equal(twentyCalls.length, 0, 'nothing is sent to Twenty when it is not configured');
+process.env.TWENTY_API_URL = 'https://crm.example/';
+process.env.TWENTY_API_KEY = 'twenty-test-key';
+const twenty = load('lib/server/twenty.ts');
+const synced = await twenty.syncInquiry({ ...data, addons: [0, 3] });
+assert.deepEqual(JSON.parse(JSON.stringify(synced)), { personId: 'createPerson-id', opportunityId: 'createOpportunity-id', noteId: 'createNote-id' });
+assert.equal(twentyCalls[0].search, '?filter=emails.primaryEmail[eq]:test@example.com&limit=1', 'people are matched by email first');
+assert.deepEqual(twentyCalls[1].body.name, { firstName: 'Test', lastName: 'Founder' }, 'the name is split for Twenty');
+assert.equal(twentyCalls[2].body.phones, undefined, 'a phone Twenty rejects is dropped instead of losing the lead');
+assert.deepEqual(twentyCalls[3].body, { name: 'Test Founder · website inquiry', stage: 'NEW', pointOfContactId: 'createPerson-id' });
+assert.match(twentyCalls[4].body.bodyV2.markdown, /AI agents for replies and research, Email campaigns and follow-up/, 'interests are written into the note');
+assert.deepEqual(twentyCalls.slice(5).map((c) => c.body), [{ noteId: 'createNote-id', personId: 'createPerson-id' }, { noteId: 'createNote-id', opportunityId: 'createOpportunity-id' }]);
+assert.ok(twentyCalls.every((c) => c.auth === 'Bearer twenty-test-key' && c.path.startsWith('/rest/')), 'every call is authenticated against /rest');
+twentyCalls.length = 0;
+twentyPeople = [{ id: 'existing-person' }];
+await twenty.syncInquiry({ ...data, addons: [] });
+assert.equal(twentyCalls.filter((c) => c.path === '/rest/people').length, 1, 'an existing person is reused, not duplicated');
+assert.equal(twentyCalls[1].body.pointOfContactId, 'existing-person');
+twentyPeople = [];
+
 // --- admin read -----------------------------------------------------------
 const listed = await admin.GET(new Request(origin + '/api/admin/inquiries'));
 assert.equal(listed.status, 200, 'a signed-in owner can read the inbox');
@@ -189,4 +230,4 @@ assert.equal((await admin.GET(new Request(origin + '/api/admin/inquiries'))).sta
   'the inbox is closed again after signing out');
 
 await client.close();
-console.log('PASS: session auth (forged/expired/wrong-password), access denial, CSRF, validation, body limit, server pricing, idempotency, conflict protection, case-insensitive search, SQL parameterisation, CSV safety, rate limits, sign-out.');
+console.log('PASS: Twenty CRM sync, session auth (forged/expired/wrong-password), access denial, CSRF, validation, body limit, server pricing, idempotency, conflict protection, case-insensitive search, SQL parameterisation, CSV safety, rate limits, sign-out.');
