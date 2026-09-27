@@ -35,13 +35,15 @@ Pricing is never shown. No dollar amounts, package prices, add-on prices, hourly
 - Preserve: existing URLs (`/services/*`, `/resources/*`, `/process`, `/work`, `/about`, `/contact`, `/privacy`, `/terms`; redirects are acceptable for renames); the inquiry form fields and admin inbox behavior; the existing service and guide copy as written, reorganized rather than rewritten, except sentences that state prices, which are removed.
 - Work / use-case projects are illustrative concepts, not client engagements. Present them as examples of what can be built; never as case studies, never with results.
 - Terminology: "inquiry" for a submitted form; "human approval" / "review gate" for the authorization step; "boundaries" for the stated limits of an offer.
-- Undecided: whether the automation capabilities become their own product pages or a hub plus sections; the final page map. Decide in surface work.
+- Page map additions (2026-09-27): `/industries` and `/industries/[slug]` (the ten industries from the home page), `/security` (how data and approvals are handled), `/automation-check` (a self-serve estimate of preparation hours an agent could take on, in hours only, never money, feeding the inquiry form), a "works with your tools" section, a comparison against doing it yourself / hiring / a large consultancy, and an engagement path (check, pilot, expand, ongoing care on request).
+- New inquiries are also pushed to the owner's Twenty CRM (person, opportunity, note) when `TWENTY_API_URL` and `TWENTY_API_KEY` are set.
 
 ## Brand Commitments
 
 - Name: Jinnx Automation. Logo: `public/images/jinnx-automation-logo.webp` (binding): a black angular "J/A" monogram with yellow triangular facets, wordmark "JINNX" in heavy black geometric caps, "AUTOMATION" letterspaced beneath. Its colors are black and a warm yellow; any visual world must sit with it.
 - Voice, from the existing copy: plain, specific, boundary-honest. Each offer states what it does, who it fits, and what it will not do. No hype, no invented urgency.
-- The site keeps its existing look (cream ground, dark teal ink, orange accent, Space Grotesk / Inter). Only content changes. Confirmed 2026-09-22 after a redesign attempt was rejected.
+- The site keeps its existing visual world as shipped: near-white paper ground with the 80px grid-paper texture, black ink (#161616), the logo's yellow (#f5ce00) as the accent, heavy tight display type. The 2026-09-22 rejection of a replacement redesign stands; no new palette or type system.
+- Motion and visuals were approved on 2026-09-27 as an extension of that world: every page hero carries a live "grid circuit" canvas (work items travel the grid lines, stop at a yellow approval gate, then continue), and the home page has one scroll-driven focal sequence showing a single inquiry going through the approval flow (GSAP ScrollTrigger). Motion always has a reduced-motion path and never hides content by default.
 
 ## Evidence on Hand
 

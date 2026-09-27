@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./reference.css";
+import "./motion.css";
 import { SITE_URL, SITE_NAME, keywords, pageMetadata } from "@/lib/seo";
 
 const title = "Jinnx Automation | AI Automation Agency: AI Agents & Workflow Automation";
