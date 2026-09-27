@@ -322,3 +322,43 @@
   .jx-agent:hover { transform: none; }
   .jx-ind-card:hover, .jx-ind-agent:hover, .jx-tools-group li:hover, .jx-btn:hover { transform: none; }
 }
+
+/* ---- Footer banner: align its content with the page column ---------- */
+/* The banner stays full-bleed; its content lines up with the footer column (1440px, 32px gutters). */
+.reference-site .footer-banner.footer-banner {
+  padding-top: 72px; padding-bottom: 72px;
+  padding-left: max(32px, calc(50vw - 688px)); padding-right: max(32px, calc(50vw - 688px));
+}
+.reference-site .footer-banner .footer-banner-inner { max-width: 1376px; gap: 48px; }
+@media (max-width: 880px) {
+  .reference-site .footer-banner.footer-banner { padding: 56px 20px; }
+}
+@media (min-width: 760px) { .reference-site .jx-hero .hero-headline { max-width: min(66%, 940px); } }
+
+/* ---- Agent run: scroll cue and progress meter ------------------------- */
+/* Cue and meter exist only where the scroll animation runs (.is-live). */
+.jx-run-intro { display: grid; gap: 22px; }
+.jx-run-cue { display: none; align-items: center; gap: 14px; justify-self: start; padding: 12px 18px 12px 14px; border-radius: 999px; background: #fff; border: 1px solid var(--jx-line); box-shadow: 0 12px 28px -20px rgb(22 22 22 / .45);
+  transition: opacity .5s var(--jx-ease), transform .5s var(--jx-ease); }
+.jx-run.is-live .jx-run-cue { display: inline-flex; }
+.jx-run.is-started .jx-run-cue { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+.jx-mouse { position: relative; width: 22px; height: 34px; border: 2px solid var(--jx-ink); border-radius: 12px; flex: none; }
+.jx-mouse i { position: absolute; left: 50%; top: 6px; width: 4px; height: 7px; margin-left: -2px; border-radius: 2px; background: var(--jx-yellow-deep); animation: jx-wheel 1.8s var(--jx-ease) infinite; }
+@keyframes jx-wheel { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 70% { transform: translateY(12px); opacity: 0; } 100% { opacity: 0; } }
+.jx-cue-text { display: grid; gap: 2px; }
+.jx-cue-text b { font: 600 15px/1.2 "Space Grotesk", Inter, sans-serif; letter-spacing: -.01em; color: var(--jx-ink); }
+.jx-cue-text small { font-size: 12.5px; color: var(--jx-mute); }
+.jx-chevrons { display: grid; gap: 1px; }
+.jx-chevrons i { width: 10px; height: 10px; border-right: 2px solid var(--jx-ink); border-bottom: 2px solid var(--jx-ink); transform: rotate(45deg); opacity: 0; animation: jx-chev 1.8s ease-in-out infinite; }
+.jx-chevrons i:nth-child(2) { animation-delay: .2s; }
+.jx-chevrons i:nth-child(3) { animation-delay: .4s; }
+@keyframes jx-chev { 0%, 100% { opacity: 0; } 40% { opacity: 1; } 70% { opacity: .2; } }
+
+.jx-run-meter { display: none; gap: 10px; margin-bottom: 4px; }
+.jx-run.is-live .jx-run-meter { display: grid; }
+.jx-run-count { font-size: 13px; color: var(--jx-mute); }
+.jx-run-count b { color: var(--jx-ink); font-variant-numeric: tabular-nums; }
+.jx-run-count span { color: var(--jx-ink); font-weight: 600; }
+.jx-run-bar { position: relative; height: 4px; border-radius: 99px; background: #ececE6; overflow: hidden; }
+.jx-run-bar i { position: absolute; inset: 0; background: var(--jx-yellow); transform-origin: left; transform: scaleX(0); border-radius: inherit; }
+@media (prefers-reduced-motion: reduce) { .jx-mouse i, .jx-chevrons i { animation: none; opacity: 1; } }

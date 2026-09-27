@@ -152,7 +152,7 @@ export function GridCircuit({ variant, className = '' }: { variant: CircuitVaria
     if (!canvas || !ctx) return;
     const map = MAPS[variant];
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let w = 0, h = 0, raf = 0, last = 0, spawnIn = 0, visible = false;
+    let w = 0, h = 0, raf = 0, last = 0, spawnIn = 0, visible = false, hidden = false;
     let sources: Pt[] = [], gates: Pt[] = [], exits: Pt[] = [];
     // legs[route] = the ordered paths an item walks; gateAt[route][leg] = gate index at the end of that leg, or -1.
     let legs: Path[][] = [], gateAt: number[][] = [];
@@ -167,11 +167,23 @@ export function GridCircuit({ variant, className = '' }: { variant: CircuitVaria
       canvas.width = Math.round(w * dpr); canvas.height = Math.round(h * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       const narrow = w < 760;
+      // Wide screens: never draw under the headline or intro. Measure where the
+      // left-column text actually ends and start the drawing past it.
+      const mapMin = Math.min(...map.sources.map(q => q.x), ...map.gates.map(q => q.x)) - .02;
+      const box = canvas.getBoundingClientRect();
+      let textRight = 0;
+      canvas.parentElement?.querySelectorAll('h1, h1 + p, .hero-sub, .page-hero > .wrap > p').forEach(el => {
+        const r = document.createRange(); r.selectNodeContents(el);
+        const b = r.getBoundingClientRect();
+        if (b.width && b.left - box.left < w * .5) textRight = Math.max(textRight, b.right - box.left);
+      });
+      const fromX = Math.max(mapMin * w, textRight + 72), toX = w;
+      hidden = !narrow && toX - fromX < 340;
       // Narrow screens: the drawing lives in the band CSS reserves under the hero copy.
-      const band = 200, minX = Math.min(...map.sources.map(q => q.x), ...map.gates.map(q => q.x)) - .02;
+      const band = 200, minX = mapMin;
       const place = (p: Pt): Pt => narrow
         ? { ...p, x: Math.round(Math.max(20, Math.min(w - 20, (p.x - minX) / (1 - minX) * (w - 40) + 20)) / (CELL / 2)) * (CELL / 2), y: Math.round((h - band + 30 + p.y * (band - 60)) / (CELL / 2)) * (CELL / 2) }
-        : { ...p, x: snap(p.x * w, w - CELL / 2), y: snap(p.y * h, h - CELL / 2) };
+        : { ...p, x: snap(fromX + (p.x - mapMin) / (1 - mapMin) * (toX - fromX), w - CELL / 2), y: snap(p.y * h, h - CELL / 2) };
       sources = map.sources.map(place); gates = map.gates.map(place); exits = map.exits.map(place);
       const table = map.routes ?? map.sources.map((_, i) => [i, i % map.gates.length, i % map.exits.length] as [number, number, number]);
       legs = []; gateAt = [];
@@ -215,6 +227,7 @@ export function GridCircuit({ variant, className = '' }: { variant: CircuitVaria
 
     const draw = (dt: number) => {
       ctx.clearRect(0, 0, w, h);
+      if (hidden) return;
       // The routes themselves, drawn over the paper grid.
       ctx.lineWidth = 1.5; ctx.strokeStyle = `rgba(${INK},.13)`;
       legs.forEach(chain => chain.forEach(p => { ctx.beginPath(); p.segs.forEach((s, i) => { if (i === 0) ctx.moveTo(s.x1, s.y1); ctx.lineTo(s.x2, s.y2); }); ctx.stroke(); }));
@@ -314,6 +327,7 @@ export function GridCircuit({ variant, className = '' }: { variant: CircuitVaria
     if (reduce) still(); else { for (let i = 0; i < 40; i++) step(.1); draw(0); }
     const ro = new ResizeObserver(() => { layout(); if (reduce) still(); else draw(0); });
     ro.observe(canvas);
+    document.fonts?.ready.then(() => { layout(); if (reduce) still(); else draw(0); });
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); });
     io.observe(canvas);
     const onVis = () => start();

@@ -33,31 +33,44 @@ export function AgentRun() {
         const q = gsap.utils.selector(el);
         const stepsEls = q('.jx-run-step');
         const gate = q('.jx-run-gate')[0];
-        // Highlight whichever step the scrubbed playhead is in, in either scroll direction.
+        const count = q('.jx-run-count b')[0], label = q('.jx-run-count span')[0], bar = q('.jx-run-bar i')[0];
+        el.classList.add('is-live');
+        // Everything reads the timeline's own playhead, so the highlighted step,
+        // the counter and the board can never disagree, even while scrub catches up.
         const sync = () => {
           const t = tl.time();
           let i = 0;
           for (let k = 0; k < steps.length; k++) if (t >= tl.labels['s' + k]) i = k;
           stepsEls.forEach((s, j) => { s.classList.toggle('is-active', j === i); s.classList.toggle('is-done', j < i); });
           gate?.classList.toggle('is-approved', t >= tl.labels.approved);
+          if (count) count.textContent = String(i + 1);
+          if (label) label.textContent = steps[i].title;
+          if (bar) bar.style.transform = 'scaleX(' + tl.progress().toFixed(3) + ')';
+          el.classList.toggle('is-started', tl.progress() > .02);
         };
         const tl = gsap.timeline({
           defaults: { ease: 'expo.out', duration: .6 },
-          scrollTrigger: { trigger: q('.jx-run-stage')[0], start: 'top 12%', end: '+=1900', pin: true, scrub: .6, onUpdate: () => sync(), onRefresh: () => sync() },
+          onUpdate: () => sync(),
+          scrollTrigger: { trigger: q('.jx-run-stage')[0], start: 'top 14%', end: '+=2000', pin: true, scrub: .5, anticipatePin: 1 },
         });
-        gsap.set(q('.jx-run-card'), { autoAlpha: 0, y: 26 });
+        // The first message is on the board from the start, so it is never empty.
+        gsap.set(q('.jx-run-card:not(.jx-run-msg)'), { autoAlpha: 0, y: 26 });
         gsap.set(q('.jx-run-check'), { autoAlpha: 0, x: -10 });
         gsap.set(q('.jx-run-draft p'), { clipPath: 'inset(0 100% 0 0)' });
         gsap.set(q('.jx-run-stamp'), { autoAlpha: 0, scale: 1.4, rotate: -8 });
         gsap.set(q('.jx-run-sent'), { autoAlpha: 0, y: 10 });
-        tl.addLabel('s0').to(q('.jx-run-msg'), { autoAlpha: 1, y: 0 })
+        tl.addLabel('s0').to({}, { duration: .7 })
           .addLabel('s1').to(q('.jx-run-checks'), { autoAlpha: 1, y: 0 }).to(q('.jx-run-check'), { autoAlpha: 1, x: 0, stagger: .18 })
           .addLabel('s2').to(q('.jx-run-draft'), { autoAlpha: 1, y: 0 }).to(q('.jx-run-draft p'), { clipPath: 'inset(0 0% 0 0)', duration: 1.4, ease: 'none' })
-          .addLabel('s3').to(q('.jx-run-gate'), { autoAlpha: 1, y: 0 }).to({}, { duration: .6 })
+          .addLabel('s3').to(q('.jx-run-gate'), { autoAlpha: 1, y: 0 }).to({}, { duration: .7 })
           .addLabel('s4').addLabel('approved').to(q('.jx-run-stamp'), { autoAlpha: 1, scale: 1, rotate: -4, ease: 'back.out(2)' })
-          .to(q('.jx-run-sent'), { autoAlpha: 1, y: 0 }).to({}, { duration: .4 });
+          .to(q('.jx-run-sent'), { autoAlpha: 1, y: 0 }).to({}, { duration: .5 });
         sync();
-        return () => { stepsEls.forEach(s => s.classList.remove('is-active', 'is-done')); gate?.classList.remove('is-approved'); };
+        return () => {
+          stepsEls.forEach(s => s.classList.remove('is-active', 'is-done'));
+          gate?.classList.remove('is-approved');
+          el.classList.remove('is-live', 'is-started');
+        };
       });
       ctx = mm;
     })();
@@ -69,7 +82,14 @@ export function AgentRun() {
       <div className="jx-wrap">
         <header className="jx-run-head">
           <h2 id="jx-run-title">Follow one inquiry through.<br /><span>Nothing leaves without you.</span></h2>
-          <p>This is the whole loop for an AI reply agent: five steps, and the fourth one is yours.</p>
+          <div className="jx-run-intro">
+            <p>This is the whole loop for an AI reply agent: five steps, and the fourth one is yours.</p>
+            <div className="jx-run-cue" aria-hidden="true">
+              <span className="jx-mouse"><i /></span>
+              <span className="jx-cue-text"><b>Scroll to run it</b><small>Each step plays as you scroll</small></span>
+              <span className="jx-chevrons"><i /><i /><i /></span>
+            </div>
+          </div>
         </header>
         <div className="jx-run-stage">
           <ol className="jx-run-steps">
@@ -81,6 +101,10 @@ export function AgentRun() {
             ))}
           </ol>
           <div className="jx-run-board" aria-label="Example: an inquiry moving through the approval flow">
+            <div className="jx-run-meter" aria-hidden="true">
+              <span className="jx-run-count">Step <b>1</b> of {steps.length} · <span>{steps[0].title}</span></span>
+              <span className="jx-run-bar"><i /></span>
+            </div>
             <div className="jx-run-card jx-run-msg">
               <span className="jx-run-avatar">DR</span>
               <div><b>Dana Reyes · Reyes Landscaping</b><small>Hi, can you quote weekly maintenance for two commercial sites from May?</small></div>
