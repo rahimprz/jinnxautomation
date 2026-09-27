@@ -333,7 +333,23 @@
 @media (max-width: 880px) {
   .reference-site .footer-banner.footer-banner { padding: 56px 20px; }
 }
-@media (min-width: 760px) { .reference-site .jx-hero .hero-headline { max-width: min(66%, 940px); } }
+/* ---- Hero headlines: sized to their column, never split mid-word ------ */
+/* The headline measures its own column (container query units), so a long word
+   like "busywork" always fits on one line whatever the window width. */
+.reference-site .hero-row > * { container-type: inline-size; min-width: 0; }
+.reference-site .hero-row .hero-headline { font-size: clamp(34px, min(8.5vw, 12.6cqi), 124px); line-height: .94; }
+.reference-site .hero-row .hero-headline .accent { display: inline-block; }
+@media (max-width: 759px) { .reference-site .hero-row .hero-headline { font-size: clamp(34px, 12.6cqi, 72px); } }
+
+/* ---- Nav: switch to the menu button before the links would wrap -------- */
+.reference-site .nav-links a { white-space: nowrap; }
+@media (min-width: 881px) and (max-width: 1120px) {
+  .reference-site .nav-links, .reference-site .nav .nav-cta-desktop { display: none; }
+  .reference-site .nav-toggle { display: inline-flex; }
+  .reference-site .nav-mobile.open { display: block; }
+}
+.reference-site .hero-headline { overflow-wrap: normal; word-break: normal; hyphens: manual; }
+@media (min-width: 760px) { .reference-site .portfolio-page .jx-hero .hero-headline { max-width: min(66%, 940px); } }
 
 /* ---- Agent run: scroll cue and progress meter ------------------------- */
 /* Cue and meter exist only where the scroll animation runs (.is-live). */

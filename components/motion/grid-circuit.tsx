@@ -16,6 +16,7 @@ type Map = {
   every: number;       // seconds between new items
   hold: [number, number]; // seconds an item waits for approval
   held?: number;       // index of a source whose items are always stopped at the gate
+  above?: string;      // draw only in the space above this element (y values become fractions of that band)
   heldLabel?: string;
 };
 
@@ -25,9 +26,10 @@ export type CircuitVariant =
 
 const MAPS: Record<CircuitVariant, Map> = {
   home: {
-    sources: [{ x: .56, y: .05, label: 'Quote request' }, { x: .52, y: .16, label: 'New lead' }],
-    gates: [{ x: .7, y: .1, label: 'Your approval' }],
-    exits: [{ x: .96, y: .05, label: 'Sent' }, { x: .96, y: .16, label: 'Logged in CRM' }],
+    sources: [{ x: .56, y: .22, label: 'Quote request' }, { x: .52, y: .78, label: 'New lead' }],
+    gates: [{ x: .7, y: .5, label: 'Your approval' }],
+    exits: [{ x: .96, y: .22, label: 'Sent' }, { x: .96, y: .78, label: 'Logged in CRM' }],
+    above: '.hero-row > :last-child',
     speed: 110, every: 1.6, hold: [1, 1.8],
   },
   services: {
@@ -178,12 +180,15 @@ export function GridCircuit({ variant, className = '' }: { variant: CircuitVaria
         if (b.width && b.left - box.left < w * .5) textRight = Math.max(textRight, b.right - box.left);
       });
       const fromX = Math.max(mapMin * w, textRight + 72), toX = w;
-      hidden = !narrow && toX - fromX < 340;
+      // Optional ceiling: some heroes (home) only have room above a card.
+      const ceilEl = map.above ? canvas.parentElement?.querySelector(map.above) : null;
+      const bandH = ceilEl ? ceilEl.getBoundingClientRect().top - box.top - 16 : h;
+      hidden = !narrow && (toX - fromX < 340 || (!!ceilEl && bandH < 150));
       // Narrow screens: the drawing lives in the band CSS reserves under the hero copy.
       const band = 200, minX = mapMin;
       const place = (p: Pt): Pt => narrow
         ? { ...p, x: Math.round(Math.max(20, Math.min(w - 20, (p.x - minX) / (1 - minX) * (w - 40) + 20)) / (CELL / 2)) * (CELL / 2), y: Math.round((h - band + 30 + p.y * (band - 60)) / (CELL / 2)) * (CELL / 2) }
-        : { ...p, x: snap(fromX + (p.x - mapMin) / (1 - mapMin) * (toX - fromX), w - CELL / 2), y: snap(p.y * h, h - CELL / 2) };
+        : { ...p, x: snap(fromX + (p.x - mapMin) / (1 - mapMin) * (toX - fromX), w - CELL / 2), y: ceilEl ? Math.round((28 + p.y * (bandH - 56)) / (CELL / 2)) * (CELL / 2) : snap(p.y * h, h - CELL / 2) };
       sources = map.sources.map(place); gates = map.gates.map(place); exits = map.exits.map(place);
       const table = map.routes ?? map.sources.map((_, i) => [i, i % map.gates.length, i % map.exits.length] as [number, number, number]);
       legs = []; gateAt = [];

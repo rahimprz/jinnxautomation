@@ -56,7 +56,8 @@ export function ReferenceSite({route,selected,total,onToggle,onContact,children,
   if(typeof n==='string')return n;
   const p:Record<string,any>={...n.props,key};const cls=String(p.className||'');const component=p['data-component'];
   if(/\b(stat-strip-num|adv-result-num|adv-hs-num)\b/.test(cls)||(/\bnum\b/.test(cls)&&/proof-stat|industries-stat|footer-stat/.test(parentCls))){let used=false;return createElement(n.tag,p,n.children.map((c,i)=>typeof c==='string'&&!used&&/\d/.test(c)?(used=true,<CountUp key={key+'.c'} text={c}/>):render(c,key+'.'+i,cls)))}
-  if(n.tag==='section'&&/^hero\b/.test(cls))return createElement(n.tag,{...p,className:cls+' jx-hero'},<GridCircuit key={key+'.circuit'} variant={page==='portfolio'?'work':'home'}/>,...n.children.map((c,i)=>render(c,key+'.'+i,cls)));
+  // The home hero already animates the approval flow in its inbox card; only the portfolio hero gets a circuit.
+  if(page==='portfolio'&&n.tag==='section'&&/^hero\b/.test(cls))return createElement(n.tag,{...p,className:cls+' jx-hero'},<GridCircuit key={key+'.circuit'} variant="work"/>,...n.children.map((c,i)=>render(c,key+'.'+i,cls)));
   if(component==='summary')return <React.Fragment key={key}>{summary()}</React.Fragment>;
   if(component==='countdown')return <PlanningCountdown key={key}/>;
   if(component==='approval-demo')return <ApprovalDemo key={key}/>;
