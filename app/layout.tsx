@@ -5,7 +5,7 @@ import "./motion.css";
 import { SITE_URL, SITE_NAME, keywords, pageMetadata } from "@/lib/seo";
 
 const title = "Jinnx Automation | AI Automation Agency: AI Agents & Workflow Automation";
-const description = "AI automation agency for owner-run businesses: AI agents, lead discovery, AI-drafted replies with your approval, CRM pipelines, voice AI, invoicing and reporting, plus custom software.";
+const description = "Stop doing work your business can automate. Jinnx Automation builds AI agents for owner-run businesses that find leads, draft replies, follow up, update your CRM and prepare invoice reminders. You review and approve every important step.";
 
 export const metadata: Metadata = {
   ...pageMetadata("/", title, description),

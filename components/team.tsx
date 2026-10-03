@@ -5,7 +5,7 @@ import { services } from '@/lib/site-content';
 
 // Each AI employee gets a badge drawn from the logo's language: yellow
 // triangular facets on black, arranged uniquely from its name.
-function Facets({ name, size = 56 }: { name: string; size?: number }) {
+export function Facets({ name, size = 56 }: { name: string; size?: number }) {
   let h = 0;
   for (const c of name) h = (h * 31 + c.charCodeAt(0)) >>> 0;
   const cells: string[] = [];
